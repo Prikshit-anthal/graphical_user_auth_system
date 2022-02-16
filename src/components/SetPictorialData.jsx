@@ -44,10 +44,16 @@ import {
 //   console.log('uploaded : ' + fileUrl)
 // })
 
+//del doc and store
+//  deleteDoc(doc(db1, 'blogs', timestamp))
+//  const desertRef = ref(storage, `${timestamp}`)
+//  deleteObject(desertRef)
 
+function SetPictorialData(poops) {
 
-function SetPictorialData() {
-
+  const { images, setImages, tagNames, setTagNames, checker, setChecker } =
+    poops.poop
+ 
 
 
   async function setDataDb() {
@@ -57,29 +63,42 @@ function SetPictorialData() {
 
     console.log(imgsRef.files.length)
 
-    const picsUrl = []
+    let picsUrl = []
+    let timeStampUrl=[]
+    let storagePaths=[]
 
     const storage = getStorage()
+
+     var newTimestamp = String(new Date().getTime())
 
     for (let i = 0; i < imgsRef.files.length; i++) {
       let folder = ref(
         storage,
-        `${tagRef.value}//${i}//${imgsRef.files[i].name}`
+        `${tagRef.value}//${newTimestamp}//${imgsRef.files[i].name}`
       )
 
       console.log(folder)
       await uploadBytes(folder, imgsRef.files[i]).then((res) => {
         getDownloadURL(folder).then((url) => {
           picsUrl.push(url)
-
+          timeStampUrl.push(newTimestamp);
+          storagePaths.push(
+            `${tagRef.value}/${newTimestamp}/${imgsRef.files[i].name}`
+          );
           if (i === imgsRef.files.length - 1) {
             setDoc(doc(db, 'images', tagRef.value), {
               name: tagRef.value,
               imgUrl: picsUrl,
+              timeStamps: timeStampUrl,
+              storagePath: storagePaths,
             })
+
+            setChecker(!checker)
+            
           }
         })
         console.log('uploaded ' + i + 'th img')
+       
       })
     }
 

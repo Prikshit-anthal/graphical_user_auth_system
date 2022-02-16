@@ -1,0 +1,17 @@
+
+.sliderHere{
+    overflow: hidden;
+}
+.sliderContainer{
+ 
+
+   white-space: nowrap;
+  transition: transform 0.3s;
+}
+.item{
+ display:inline-flex;
+  white-space:normal;
+   position: relative; 
+  align-items: center;
+  justify-content: center;
+}

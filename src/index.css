@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css?family=Rajdhani:500,700&display=swap');
+
+body {
+  background: #efefef;
+
+  font-family: Rajdhani, sans-serif;
+}

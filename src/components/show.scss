@@ -3,9 +3,27 @@
   width: 90%;
   display: grid;
   justify-content: center;
-  grid-template-columns: 30% 30% 30%;
-  grid-template-rows: auto;
+  grid-template-columns: 20vw 20vw 20vw;
+  grid-auto-rows: 30vh;
   grid-column-gap: 15px;
   grid-row-gap: 20px;
     }
+    .images{
+        img{
+            height:100%;
+            width: 100%;
+             object-position: center;
+        object-fit: cover;
+        box-shadow: 0 0 10px;
+        }
+    }
+}
+.hid_see{
+    display: none;
+}
+.selected{
+    
+}
+.notSelected{
+    
 }
