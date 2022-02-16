@@ -1,0 +1,11 @@
+.tag{
+    .images{
+  width: 90%;
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 30% 30% 30%;
+  grid-template-rows: auto;
+  grid-column-gap: 15px;
+  grid-row-gap: 20px;
+    }
+}
