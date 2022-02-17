@@ -1,5 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import './SelectImgFromTag.scss'
+import db from '../FireBase'
+import {
+  getStorage,
+  ref,
+  deleteObject,
+  uploadBytes,
+  getDownloadURL,
+} from 'firebase/storage'
+import {
+  collection,
+  getDocs,
+  Timestamp,
+  doc,
+  setDoc,
+  updateDoc,
+  deleteDoc,
+} from 'firebase/firestore'
+
 
 function SelectImgFromTag(poops) {
   const {
@@ -36,8 +54,64 @@ function SelectImgFromTag(poops) {
     //    console.log('hi'+activeIndex)
   }, [activeIndex])
 
+  const createNewUser=async ()=>{
+    if (selectedForPass.length <= 5) {
+      alert('Min 5 imgs to be selected for password')
+      return
+    }
+
+    let tagArr=[],imgArr=[];
+    for(let i=0;i<selectedForPass.length;i++)
+    {
+      tagArr.push(tagNames[selectedForPass[i][0]]);
+      imgArr.push(images[selectedForPass[i][0]][selectedForPass[i][1]]);
+    }
+    //username check left still
+    await setDoc(doc(db, 'Users', 'UserName'), {
+      userName:'UserName',
+      tags: tagArr,
+      imagesUrl: imgArr,
+      minImages:2,
+      maxImages:5,
+    })
+    console.log('done');
+  }
+
   return (
     <div className='sliderHere'>
+      <div className='popUpHere' >
+        <div className='w-full mt-12  flex justify-center items-center flex-col item'>
+          <div className='w-10/12  flex flex-col  items-center imageBox'>
+            <div className='w-full text-4xl font-bold tagName text-center flex justify-between'>
+              <button
+              onClick={()=>{
+                document.getElementsByClassName('popUpHere')[0].style.display='none';
+              }}
+              >back</button>
+              Selected
+              <button
+              onClick={()=>{
+                setSelectionForPass((val)=>{
+                  return([])
+                })
+              }}>De-select all</button>
+            </div>
+            <div className='images'>
+              {selectedForPass.map((val, idx) => {
+                return (
+                  <div>
+                    <img
+                      src={images[val[0]][val[1]]}
+                      className='selected'
+                      alt='SOS'
+                    />
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+        </div>
+      </div>
       <div
         className=' sliderContainer'
         style={{ transform: `translateX(-${activeIndex * 100}%)` }}
@@ -45,7 +119,7 @@ function SelectImgFromTag(poops) {
         {tagNames.map((tag, idx) => {
           return (
             <div className='w-full  flex justify-center items-center flex-col item'>
-              <div className='w-10/12  flex flex-col justify-center items-center imageBox'>
+              <div className='w-10/12  flex flex-col  items-center imageBox'>
                 <div className='w-full text-4xl font-bold tagName text-center flex justify-between'>
                   <button
                     onClick={() => {
@@ -125,9 +199,20 @@ function SelectImgFromTag(poops) {
           )
         })}
       </div>
-      <div>
-        No of selections:
-        {selectedForPass.length}
+      <div className=' flex justify-between items-center text-4xl font-bold m-8'>
+        <div>Selections made : {selectedForPass.length}</div>
+        <div>
+          <button onClick={() => {
+           let ref= document.getElementsByClassName('popUpHere')[0];
+           if(ref.style.display==='block')
+           ref.style.display='none';
+           else
+           ref.style.display = 'block';
+          }}>View</button>
+          <button
+          onClick={createNewUser}
+          >Set</button>
+        </div>
       </div>
     </div>
   )

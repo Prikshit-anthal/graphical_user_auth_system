@@ -1,11 +1,19 @@
 
 .sliderHere{
     overflow: hidden;
-   
-}
-.sliderContainer{
+    .popUpHere{
+        top:0;
+        background-color: white;
+        display: none;
+        position: absolute;
+        opacity:2;
+        margin: auto;
+        z-index: 10;
+        width: 100vw;
+        height:100vh;
+    }
     .imageBox{
-        
+        min-height: 30vh;
         max-width: 70vw;
         max-height:80vh ;
         border: 2px solid;
@@ -16,7 +24,7 @@
   display: grid;
   justify-content: center;
   grid-template-columns: 33% 33% 33%;
-  grid-auto-rows: 33%;
+//   grid-auto-rows: 33%;
   grid-column-gap: 15px;
   grid-row-gap: 20px;
   overflow-y: scroll;
@@ -31,6 +39,9 @@
         box-shadow: 0 0 10px;
         }
     }
+}
+.sliderContainer{
+   
 
    white-space: nowrap;
   transition: transform 0.3s;
