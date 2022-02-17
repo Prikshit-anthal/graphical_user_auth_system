@@ -6,10 +6,10 @@ import SelectImgFromTag from './components/SelectImgFromTag';
 
 function App() {
   return (
-    // <Display/>
+    <Display/>
     // <Login />
     // <CreateAccount/>
-    <SelectImgFromTag/>
+    // <SelectImgFromTag/>
   )
 }
 

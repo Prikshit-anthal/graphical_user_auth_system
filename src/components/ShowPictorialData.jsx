@@ -187,7 +187,7 @@ const storage = getStorage()
                 </div>
 
                 <div className='images'>
-                  {images.length===0?<></>:images[idx].map((imageUrl, index) => {
+                  {images[idx].map((imageUrl, index) => {
                     return <img src={imageUrl} data-tag-idx={idx} data-url-idx={index} key={index} className='selected' onClick={(e)=>{
                     let ref =
                       e.target.parentNode.parentNode.getElementsByClassName(

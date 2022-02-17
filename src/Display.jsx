@@ -3,6 +3,7 @@ import Nav from './components/Nav'
 import { useLayoutEffect } from 'react'
 import SetPictorialData from './components/SetPictorialData'
 import ShowPictorialData from './components/ShowPictorialData'
+import SelectImgFromTag from './components/SelectImgFromTag'
 import Login from './Login'
 
 import db from './FireBase'
@@ -30,6 +31,7 @@ function Display() {
   const [checker, setChecker] = useState(false)
   const [storePaths,setStorePaths]=useState([])
   const [timeStamps,setTimeStamps]=useState([])
+ 
 
   const obj = {
     images: images,
@@ -83,14 +85,16 @@ function Display() {
   console.log(tagNames)
   return (
     <>
-      <Nav navOption={navOption} setNavOption={setNavOption} />
+      {/* <Nav navOption={navOption} setNavOption={setNavOption} />
       <div className='ml-64 m-4 '>
         <div className='ml-4'>
-          {/* <SetPictorialData poop={obj}></SetPictorialData>
-          <ShowPictorialData poop={obj}></ShowPictorialData> */}
+          <SetPictorialData poop={obj}></SetPictorialData>
+          <ShowPictorialData poop={obj}></ShowPictorialData> 
          
         </div>
-      </div>
+      </div> */}
+      <SelectImgFromTag poop={obj} />
+     
     </>
   )
 }

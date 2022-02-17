@@ -3,8 +3,8 @@
   width: 90%;
   display: grid;
   justify-content: center;
-  grid-template-columns: 20vw 20vw 20vw;
-  grid-auto-rows: 30vh;
+  grid-template-columns: 100/3% 100/3% 100/3%;
+  grid-auto-rows: 100/3%;
   grid-column-gap: 15px;
   grid-row-gap: 20px;
     }
