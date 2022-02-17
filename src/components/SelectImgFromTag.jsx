@@ -24,36 +24,46 @@ function SelectImgFromTag() {
         className=' sliderContainer'
         style={{ transform: `translateX(-${activeIndex * 100}%)` }}
       >
-        <div className='flex justify-center items-center flex-col item'>
-          <div>TagName</div>
-          <div>
-            Content Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-            Perferendis autem suscipit quaerat excepturi officiis mollitia omnis
-            atque recusandae odio rem. Molestias voluptate consectetur minima
-            voluptas perspiciatis amet voluptatibus, deleniti voluptatum
-            quibusdam totam quas similique. Nesciunt ipsa placeat soluta nam
-            ipsum excepturi officia odit fugit assumenda explicabo in
-            consequuntur, ullam, optio, voluptates cumque a consectetur
-            obcaecati doloribus facilis hic suscipit! Reprehenderit fugit vitae
-            ipsa optio eos ex repellendus aperiam voluptatem error eius beatae
-            dignissimos dolorem at nulla quas minus repellat quos vero, eligendi
-            totam enim facere animi. Hic delectus exercitationem dolore!
+        <div className='w-full  flex justify-center items-center flex-col item'>
+          <div className='w-10/12 flex flex-col justify-center items-center '>
+            <div className='w-full text-4xl font-bold tagName text-center'>
+              TagName
+            </div>
+            <div>
+              Content Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+              Perferendis autem suscipit quaerat excepturi officiis mollitia
+              omnis atque recusandae odio rem. Molestias voluptate consectetur
+              minima voluptas perspiciatis amet voluptatibus, deleniti
+              voluptatum quibusdam totam quas similique. Nesciunt ipsa placeat
+              soluta nam ipsum excepturi officia odit fugit assumenda explicabo
+              in consequuntur, ullam, optio, voluptates cumque a consectetur
+              obcaecati doloribus facilis hic suscipit! Reprehenderit fugit
+              vitae ipsa optio eos ex repellendus aperiam voluptatem error eius
+              beatae dignissimos dolorem at nulla quas minus repellat quos vero,
+              eligendi totam enim facere animi. Hic delectus exercitationem
+              dolore!
+            </div>
           </div>
         </div>
-        <div className=' flex justify-center items-center flex-col item'>
-          <div>TagName</div>
-          <div>
-            Content Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-            Perferendis autem suscipit quaerat excepturi officiis mollitia omnis
-            atque recusandae odio rem. Molestias voluptate consectetur minima
-            voluptas perspiciatis amet voluptatibus, deleniti voluptatum
-            quibusdam totam quas similique. Nesciunt ipsa placeat soluta nam
-            ipsum excepturi officia odit fugit assumenda explicabo in
-            consequuntur, ullam, optio, voluptates cumque a consectetur
-            obcaecati doloribus facilis hic suscipit! Reprehenderit fugit vitae
-            ipsa optio eos ex repellendus aperiam voluptatem error eius beatae
-            dignissimos dolorem at nulla quas minus repellat quos vero, eligendi
-            totam enim facere animi. Hic delectus exercitationem dolore!
+        <div className='w-full  flex justify-center items-center flex-col item'>
+          <div className='w-10/12 flex justify-center items-center flex-col item'>
+            <div className='w-full text-4xl font-bold tagName text-center'>
+              TagName
+            </div>
+            <div>
+              Content Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+              Perferendis autem suscipit quaerat excepturi officiis mollitia
+              omnis atque recusandae odio rem. Molestias voluptate consectetur
+              minima voluptas perspiciatis amet voluptatibus, deleniti
+              voluptatum quibusdam totam quas similique. Nesciunt ipsa placeat
+              soluta nam ipsum excepturi officia odit fugit assumenda explicabo
+              in consequuntur, ullam, optio, voluptates cumque a consectetur
+              obcaecati doloribus facilis hic suscipit! Reprehenderit fugit
+              vitae ipsa optio eos ex repellendus aperiam voluptatem error eius
+              beatae dignissimos dolorem at nulla quas minus repellat quos vero,
+              eligendi totam enim facere animi. Hic delectus exercitationem
+              dolore!
+            </div>
           </div>
         </div>
       </div>
