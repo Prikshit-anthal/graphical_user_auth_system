@@ -31,15 +31,24 @@ import {
   query,
 } from 'firebase/firestore'
 
-function Display() {
+function Display(poops) {
 
-  const [images, setImages] = useState([])
-  const [tagNames, setTagNames] = useState([])
-  const [checker, setChecker] = useState(false)
-  const [storePaths, setStorePaths] = useState([])
-  const [timeStamps, setTimeStamps] = useState([])
+  const {
+    images,
+    setImages,
+    tagNames,
+    setTagNames,
+    checker,
+    setChecker,
+    storePaths,
+    setStorePaths,
+    timeStamps,
+    setTimeStamps,
+  } = poops.DB_DATA
 
 
+console.log(images);
+console.log(tagNames);
 
   const [userImages, setUserImages] = useState([])
   const [uuserImages, usetUserImages] = useState([])
@@ -47,56 +56,57 @@ function Display() {
   var [noOfImagess, setNoOfImagess] = useState(0)
   var [userImageUrls, setUserImageUrls] = useState([])
 
+
   //db data from prop
   useLayoutEffect(() => {
-
       const params = new URL(document.location).searchParams
       var decrypted =atob( params.get('userName'))
       var userName=decrypted;
       console.log(userName)
 
-    // get doc
-    let tempTag = [],
-      tempImg = [],
-      tempStorePaths = [],
-      tempTimeStamps = []
 
-    async function DATA_FROM_DB() {
-      const imagesInfo = collection(db, 'images')
-      const imagesDocs = await getDocs(imagesInfo)
-      var check = imagesDocs.docs.map((doc) => {
-        // tagNames.push(doc.data().name);
-        tempTag.push(doc.data().name)
-        if (doc.data().imgUrl !== undefined) tempImg.push(doc.data().imgUrl)
-        else tempImg.push([])
-        if (doc.data().storagePath !== undefined)
-          tempStorePaths.push(doc.data().storagePath)
-        else tempStorePaths.push([])
-        if (doc.data().timeStamps !== undefined)
-          tempTimeStamps.push(doc.data().timeStamps)
-        else tempTimeStamps.push([])
+    // // get doc
+    // let tempTag = [],
+    //   images = [],
+    //   tempStorePaths = [],
+    //   tempTimeStamps = []
 
-        return true
-      })
+    // async function DATA_FROM_DB() {
+    //   const imagesInfo = collection(db, 'images')
+    //   const imagesDocs = await getDocs(imagesInfo)
+    //   var check = imagesDocs.docs.map((doc) => {
+    //     // tagNames.push(doc.data().name);
+    //     tempTag.push(doc.data().name)
+    //     if (doc.data().imgUrl !== undefined) images.push(doc.data().imgUrl)
+    //     else images.push([])
+    //     if (doc.data().storagePath !== undefined)
+    //       tempStorePaths.push(doc.data().storagePath)
+    //     else tempStorePaths.push([])
+    //     if (doc.data().timeStamps !== undefined)
+    //       tempTimeStamps.push(doc.data().timeStamps)
+    //     else tempTimeStamps.push([])
 
-      setTimeStamps(tempTimeStamps)
-      setImages(tempImg)
-      setTagNames(tempTag)
-      setStorePaths(tempStorePaths)
+    //     return true
+    //   })
 
-      //  console.log(tempImg)
-      //  console.log(tempTag)
-      //  console.log(tempStorePaths)
-      //  return [tempImg, tempTag, tempStorePaths, tempTimeStamps]
-       getUserImages();
-    }
+    //   setTimeStamps(tempTimeStamps)
+    //   setImages(images)
+    //   setTagNames(tempTag)
+    //   setStorePaths(tempStorePaths)
+
+    //   //  console.log(images)
+    //   //  console.log(tempTag)
+    //   //  console.log(tempStorePaths)
+    //   //  return [images, tempTag, tempStorePaths, tempTimeStamps]
+    //    getUserImages();
+    // }
 
       async function  getUserImages(){
       //rand images
       var randomImages = []
-      for (let i = 0; i < tempImg.length; i++) {
-        for (let j = 0; j < tempImg[i].length; j++) {
-          randomImages.push(tempImg[i][j])
+      for (let i = 0; i < images.length; i++) {
+        for (let j = 0; j < images[i].length; j++) {
+          randomImages.push(images[i][j])
         }
       }
       console.log(randomImages)
@@ -155,26 +165,13 @@ function Display() {
       setUserImages(SHUFFLE_ARRAY([...finalImages]))
     }
 
-    DATA_FROM_DB()
-    // getUserImages();
-  }, [])
+    // DATA_FROM_DB()
+    //it is imp as on first render images is empty not come yet
+    //if it goes inside it encounters errors due to being empty
+    if(images.length!==0)
+    getUserImages();
+  }, [images])
 
-  
-
-  const obj = {
-    images: images,
-    // setImages: setImages,
-    tagNames: tagNames,
-    // setTagNames: setTagNames,
-    // checker: checker,
-    // setChecker: setChecker,
-    storePaths: storePaths,
-    // setStorePaths: setStorePaths,
-    timeStamps: timeStamps,
-    // setTimeStamps: setTimeStamps,
-  }
-
- 
 
   console.log(tagNames)
 
