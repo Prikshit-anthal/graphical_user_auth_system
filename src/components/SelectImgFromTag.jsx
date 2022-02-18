@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
 import './SelectImgFromTag.scss'
 import db from '../FireBase'
 import {
@@ -31,16 +31,25 @@ function SelectImgFromTag(poops) {
     setStorePaths,
     timeStamps,
     setTimeStamps,
-  } = poops.poop
+  } = poops.DB_DATA
 
   const [activeIndex, setActiveIndex] = useState(0)
   const [nextDisable, setNextDisable] = useState(false)
   const [prevDisable, setPrevDisable] = useState(true)
    const [selectedForPass, setSelectionForPass] = useState([])
-
+   const [userName,setUserName]=useState('');
   // const [selectedForPass, setSelectionForPass] = useState([])
 
   console.log(selectedForPass)
+
+  useLayoutEffect(()=>{
+
+     const params = new URL(document.location).searchParams
+     var decrypted = atob(params.get('userName'))
+      setUserName(decrypted)
+     console.log(userName)
+
+  },[userName])
 
   useEffect(() => {
     if (activeIndex >= 5) setNextDisable(true)
@@ -55,7 +64,7 @@ function SelectImgFromTag(poops) {
   }, [activeIndex])
 
   const createNewUser=async ()=>{
-    if (selectedForPass.length <= 5) {
+    if (selectedForPass.length === 4) {
       alert('Min 5 imgs to be selected for password')
       return
     }
@@ -67,14 +76,16 @@ function SelectImgFromTag(poops) {
       imgArr.push(images[selectedForPass[i][0]][selectedForPass[i][1]]);
     }
     //username check left still
-    await setDoc(doc(db, 'Users', 'UserName'), {
-      userName:'UserName',
+    await setDoc(doc(db, 'Users', userName), {
+      userName:userName,
       tags: tagArr,
       imagesUrl: imgArr,
       minImages:2,
       maxImages:5,
     })
     console.log('done');
+    alert('Account made');
+    window.location.href='/'
   }
 
   return (
@@ -92,6 +103,16 @@ function SelectImgFromTag(poops) {
               <button
               onClick={()=>{
                 setSelectionForPass((val)=>{
+                  for(let i=0;i<val.length;i++)
+                  {
+                    //making border again normal on de select all 
+                     var ref = document.querySelector(
+                         `[data-tag-idx="${val[i][0]}"][data-url-idx="${val[i][1]}"]`
+                       );
+
+                      //  console.log(ref)
+                       ref.style.border='0';
+                  }
                   return([])
                 })
               }}>De-select all</button>
@@ -176,8 +197,14 @@ function SelectImgFromTag(poops) {
                               console.log(selectedForPass)
                               return
                             }
-                            e.target.style.border = '2px solid black'
 
+                            if(selectedForPass.length===10)
+                            {
+                              alert('Max selections for password is 10 images');
+                              return;
+                            }
+                            e.target.style.border = '2px solid black'
+                            
                             setSelectionForPass((Arr) => {
                               let val = Arr.slice()
                               val.push([

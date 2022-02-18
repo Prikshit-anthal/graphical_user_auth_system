@@ -65,41 +65,7 @@ console.log(tagNames);
       console.log(userName)
 
 
-    // // get doc
-    // let tempTag = [],
-    //   images = [],
-    //   tempStorePaths = [],
-    //   tempTimeStamps = []
-
-    // async function DATA_FROM_DB() {
-    //   const imagesInfo = collection(db, 'images')
-    //   const imagesDocs = await getDocs(imagesInfo)
-    //   var check = imagesDocs.docs.map((doc) => {
-    //     // tagNames.push(doc.data().name);
-    //     tempTag.push(doc.data().name)
-    //     if (doc.data().imgUrl !== undefined) images.push(doc.data().imgUrl)
-    //     else images.push([])
-    //     if (doc.data().storagePath !== undefined)
-    //       tempStorePaths.push(doc.data().storagePath)
-    //     else tempStorePaths.push([])
-    //     if (doc.data().timeStamps !== undefined)
-    //       tempTimeStamps.push(doc.data().timeStamps)
-    //     else tempTimeStamps.push([])
-
-    //     return true
-    //   })
-
-    //   setTimeStamps(tempTimeStamps)
-    //   setImages(images)
-    //   setTagNames(tempTag)
-    //   setStorePaths(tempStorePaths)
-
-    //   //  console.log(images)
-    //   //  console.log(tempTag)
-    //   //  console.log(tempStorePaths)
-    //   //  return [images, tempTag, tempStorePaths, tempTimeStamps]
-    //    getUserImages();
-    // }
+   
 
       async function  getUserImages(){
       //rand images
@@ -155,6 +121,17 @@ console.log(tagNames);
           break
         }
         // console.log('hi')
+        let boolCheck=true;
+
+        //checking if random images match selected images
+        //dont take images selected by user as pass here as they are already taken
+        for(let j=0;j<userImageUrl.length;j++)
+        {
+             if(userImageUrl[j]===randomImages[i])
+             boolCheck=false;
+        }
+
+        if(boolCheck===true)
         finalImages.add(randomImages[i])
         i++
       }
@@ -231,6 +208,7 @@ console.log(tagNames);
                               let selectedForPass = Arr.slice()
                               for (let i = 0; i < selectedForPass.length; i++) {
                                 if (selectedForPass[i] === e.target.src) {
+                                  //splice to remove array item from begin i.e selected images un selected
                                   selectedForPass.splice(i, 1)
                                   break
                                 }

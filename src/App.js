@@ -95,18 +95,10 @@ const obj = {
   return (
     <>
       <Routes>
-        <Route
-          path='/'
-          element={<Login type={'login'}  />}
-        />
-        <Route
-          path='/create'
-          element={<Login type={'create'}  />}
-        />
-        <Route
-          path='/display'
-          element={<Display DB_DATA={obj}  />}
-        />
+        <Route path='/' element={<Login type={'login'} />} />
+        <Route path='/create' element={<Login type={'create'} />} />
+        <Route path='/display' element={<Display DB_DATA={obj} />} />
+        <Route path='/createUserPassword' element={<SelectImgFromTag DB_DATA={obj} />} />
       </Routes>
     </>
   )

@@ -24,7 +24,7 @@ function Login(prop)
           alert('No user found');
           return;
         }
-        
+
        window.location.href = '/display?userName=' + btoa(name)
      
 
@@ -40,7 +40,8 @@ function Login(prop)
             return;
           }
        })
-       console.log('Created')
+       window.location.href = '/createUserPassword?userName=' + btoa(name)
+      //  console.log('Created')
      }
      
     async function getUserNames()
