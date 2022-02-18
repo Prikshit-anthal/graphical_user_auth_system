@@ -6,6 +6,8 @@ import ShowPictorialData from './components/ShowPictorialData'
 import SelectImgFromTag from './components/SelectImgFromTag'
 import Login from './Login'
 
+import './components/SelectImgFromTag.scss'
+
 import db from './FireBase'
 import {
   getStorage,
@@ -31,11 +33,13 @@ function Display() {
   const [images, setImages] = useState([])
   const [tagNames, setTagNames] = useState([])
   const [checker, setChecker] = useState(false)
-  const [storePaths,setStorePaths]=useState([])
-  const [timeStamps,setTimeStamps]=useState([])
+  const [storePaths, setStorePaths] = useState([])
+  const [timeStamps, setTimeStamps] = useState([])
   const [userImages, setUserImages] = useState([])
   const [uuserImages, usetUserImages] = useState([])
- 
+  const [userAns, setUserAns] = useState([])
+  var [noOfImagess,setNoOfImagess]=useState(0);
+  var [userImageUrls,setUserImageUrls]=useState([]);
 
   const obj = {
     images: images,
@@ -95,51 +99,53 @@ function Display() {
     console.log(randomImages)
     //get user images
     const userInfo = collection(db, 'Users')
-    const queryForUsername = query(userInfo, where('userName', '==', 'UserName'))
+    const queryForUsername = query(
+      userInfo,
+      where('userName', '==', 'UserName')
+    )
     const userDoc = await getDocs(queryForUsername)
-    var userImageUrl_multi =userDoc.docs.map((doc) => doc.data().imagesUrl)
+    var userImageUrl_multi = userDoc.docs.map((doc) => doc.data().imagesUrl)
 
-    var userImageUrl = userImageUrl_multi[0].slice();
-    console.log(userImageUrl[0]);
+   let userImageUrl = userImageUrl_multi[0].slice()
+    console.log(userImageUrl[0])
 
     userImageUrl = shuffle(userImageUrl)
+
+    setUserImageUrls(userImageUrl.slice())
 
     console.log(userImageUrl)
 
     // usetUserImages(userImageUrl)
 
     var minImages = parseInt(userDoc.docs.map((doc) => doc.data().minImages))
-    var maxImages =parseInt( userDoc.docs.map((doc) => doc.data().maxImages))
+    var maxImages = parseInt(userDoc.docs.map((doc) => doc.data().maxImages))
 
-    console.log(minImages+maxImages)
-   var noOfImages = minImages + getRandomInt(maxImages - minImages)
+    console.log(minImages + maxImages)
+    let noOfImages=minImages + getRandomInt(maxImages - minImages);
+    setNoOfImagess(noOfImages)
+    console.log('no of images' + noOfImages)
+    const finalImages = new Set()
+    //set for images
 
-  console.log('no of images'+noOfImages)
-  const finalImages = new Set();
-  //set for images
-
-  for(let i=0;i<noOfImages;i++)
-  {
-    finalImages.add(userImageUrl[i]);
-    console.log('hi')
-  }
-
-  let i=0;
-  while(1)
-  {
-    if(finalImages.size===9)
-    {
-      break;
+    for (let i = 0; i < noOfImages; i++) {
+      finalImages.add(userImageUrl[i])
+      console.log('hi')
     }
-    // console.log('hi')
-    finalImages.add(randomImages[i]);
-    i++;
-  }
-  console.log(finalImages);
-  console.log(i)
 
-  setUserImages([...finalImages]);
+    let i = 0
+    while (1) {
+      if (finalImages.size === 9) {
+        break
+      }
+      // console.log('hi')
+      finalImages.add(randomImages[i])
+      i++
+    }
+    
+    console.log(finalImages)
+    console.log(i)
 
+    setUserImages(shuffle([...finalImages]))
   }
 
   function getRandomInt(max) {
@@ -147,7 +153,7 @@ function Display() {
   }
   function shuffle(array) {
     let currentIndex = array.length,
-    randomIndex;
+      randomIndex
 
     // While there remain elements to shuffle...
     while (currentIndex !== 0) {
@@ -168,13 +174,32 @@ function Display() {
   useLayoutEffect(() => {
     getImages()
   }, [checker])
- 
-  useEffect(()=>{
-    
 
-  },[])
+
 
   console.log(tagNames)
+  const verifyPassword=()=>{
+
+    console.log(noOfImagess)
+    console.log(userImageUrls)
+    if (userAns.length !== noOfImagess) {
+      alert('Wrong passi')
+      return
+    }
+    for (let i = 0; i < userAns.length; i++) {
+      let j=0;
+      for (; j < userImageUrls.length; j++) {
+        if (userImageUrls[j] === userAns[i]) {
+          break
+        }
+      }
+      if (j === userImageUrls.length) {
+        alert('Wrong Password')
+        return
+      }
+    }
+    alert('Login Complete');
+  }
   return (
     <>
       {/* <Nav navOption={navOption} setNavOption={setNavOption} />
@@ -187,11 +212,60 @@ function Display() {
       </div> */}
       {/* <SelectImgFromTag poop={obj} /> */}
 
-      {userImages.map((val,idx)=>{
-        return(<div>
-        <img src={val} alt="sos" />
-        </div>)
-      })}
+      {
+        <div className='sliderHere'>
+          <div className='w-full  flex justify-center items-center flex-col item'>
+            <div className='w-10/12  flex flex-col  items-center imageBox'>
+              <div className='w-full text-4xl font-bold tagName text-center flex justify-center'>
+                Select Images
+              </div>
+              <div className='images'>
+                {userImages.map((imageUrl, index) => {
+                  return (
+                    <div>
+                      <img
+                        src={imageUrl}
+                        alt='SOS'
+                        key={index}
+                        className='selected'
+                        onClick={(e) => {
+                          if (e.target.style.border === '2px solid black') {
+                            e.target.style.border = '0'
+                            setUserAns((Arr) => {
+                              let selectedForPass = Arr.slice()
+                              for (let i = 0; i < selectedForPass.length; i++) {
+                                if (selectedForPass[i] === e.target.src) {
+                                  selectedForPass.splice(i, 1)
+                                  break
+                                }
+                              }
+                              return selectedForPass
+                            })
+                            return
+                          }
+                          setUserAns((val) => {
+                            val.push(e.target.src)
+                            return [...val]
+                          })
+
+                          e.target.style.border = '2px solid black'
+                        }}
+                      />
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+          </div>
+          <div className=' flex justify-between items-center text-4xl font-bold m-8'>
+            <div>Selections made : {userAns.length}</div>
+            <div>
+             
+              <button onClick={verifyPassword}>Sign-in</button>
+            </div>
+          </div>
+        </div>
+      }
     </>
   )
 }
