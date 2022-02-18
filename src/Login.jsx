@@ -1,27 +1,95 @@
-import React, { useEffect, useLayoutEffect, useRef } from "react";
+import React, { useEffect,useState, useLayoutEffect, useRef } from "react";
 import './Login.scss'
+import db from './FireBase'
+import {
+  collection,
+  getDocs,
+} from 'firebase/firestore'
 
-function Login()
-{
+function Login(prop)
+{  
+   const type=prop.type;
+   const [userNameData,setUserNameData]=useState([]);
+
+     function validateUsername(name) {
+       let findIdx=-1;
+        userNameData.forEach((val, idx) => {
+          if (val === name) {
+            findIdx=idx;
+            
+          }
+        })
+        if(findIdx===-1)
+        {
+          alert('No user found');
+          return;
+        }
+        
+       window.location.href = '/display?userName=' + btoa(name)
+     
+
+       
+     }
+
+     function createAccount(name)
+     {
+       userNameData.forEach((val,idx)=>{
+          if(val===name)
+          {
+            alert('Username already taken');
+            return;
+          }
+       })
+       console.log('Created')
+     }
+     
+    async function getUserNames()
+     {
+              let userInfo = collection(db, 'Users')
+              let userInfo_doc = await getDocs(userInfo)
+             let userData = userInfo_doc.docs.map((doc) => doc.data().userName)
+             setUserNameData(userData)
+     }
+
+     useLayoutEffect(()=>{
+        getUserNames()
+     },[])
+
     return (
       <div className='login-wrapper'>
-        <div class='contact-wrapper'>
-          <header class='login-cta'>
-            <h2>Account Login</h2>
+        <div className='contact-wrapper'>
+          <header className='login-cta'>
+            <h2>{type==='login'?<>Account Login</>:<>Create account</>}</h2>
           </header>
           <form>
-            <div class='form-row'>
-              <input type='text' required />
+            <div className='form-row'>
+              <input type='text' className="inputName" required />
               <span>Username or Email</span>
             </div>
-            <div class='form-row'></div>
-            <div class='form-row'>
-              <button type='submit'>Login to your Account!</button>
+            <div className='form-row'></div>
+            <div className='form-row'>
+              <button type='submit' onClick={(e)=>{
+
+                e.preventDefault();
+ 
+                console.log(document.getElementsByClassName('inputName')[0].value.length)
+                if(document.getElementsByClassName('inputName')[0].value.length===0)
+                {
+                  alert('Input feild empty');
+                  return;
+                }
+
+                type === 'login'
+                  ? validateUsername(document.getElementsByClassName('inputName')[0].value)
+                  : createAccount(document.getElementsByClassName('inputName')[0].value)
+
+              }}>{type==='login'?<>Login to your Account!</>:<>Next!</>}</button>
             </div>
             <div className='flex justify-evenly'>
-              Need an account?{' '}
-              <button style={{ fontWeight: 'bolder' }}>
-                Create new account
+             {type==='login'?<>Need an account</> :<>Already have an account</>}
+              <button type='button' style={{ fontWeight: 'bolder' }} >
+                {type==='login'?<>
+                Create new account</>:<>Sign in</>}
               </button>
             </div>
           </form>

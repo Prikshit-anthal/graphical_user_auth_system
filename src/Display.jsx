@@ -5,6 +5,8 @@ import SetPictorialData from './components/SetPictorialData'
 import ShowPictorialData from './components/ShowPictorialData'
 import SelectImgFromTag from './components/SelectImgFromTag'
 import Login from './Login'
+import { SHUFFLE_ARRAY, GET_RANDOM_INT } from './constants'
+import { DATA_FROM_DB } from './constants'
 
 import './components/SelectImgFromTag.scss'
 
@@ -30,156 +32,153 @@ import {
 } from 'firebase/firestore'
 
 function Display() {
+
   const [images, setImages] = useState([])
   const [tagNames, setTagNames] = useState([])
   const [checker, setChecker] = useState(false)
   const [storePaths, setStorePaths] = useState([])
   const [timeStamps, setTimeStamps] = useState([])
+
+
+
   const [userImages, setUserImages] = useState([])
   const [uuserImages, usetUserImages] = useState([])
   const [userAns, setUserAns] = useState([])
-  var [noOfImagess,setNoOfImagess]=useState(0);
-  var [userImageUrls,setUserImageUrls]=useState([]);
+  var [noOfImagess, setNoOfImagess] = useState(0)
+  var [userImageUrls, setUserImageUrls] = useState([])
 
-  const obj = {
-    images: images,
-    setImages: setImages,
-    tagNames: tagNames,
-    setTagNames: setTagNames,
-    checker: checker,
-    setChecker: setChecker,
-    storePaths: storePaths,
-    setStorePaths: setStorePaths,
-    timeStamps: timeStamps,
-    setTimeStamps: setTimeStamps,
-  }
+  //db data from prop
+  useLayoutEffect(() => {
 
-  async function getImages() {
+      const params = new URL(document.location).searchParams
+      var decrypted =atob( params.get('userName'))
+      var userName=decrypted;
+      console.log(userName)
+
     // get doc
     let tempTag = [],
       tempImg = [],
       tempStorePaths = [],
       tempTimeStamps = []
-    const imagesInfo = collection(db, 'images')
-    const imagesDocs = await getDocs(imagesInfo)
-    var check = imagesDocs.docs.map((doc) => {
-      // tagNames.push(doc.data().name);
-      tempTag.push(doc.data().name)
-      if (doc.data().imgUrl !== undefined) tempImg.push(doc.data().imgUrl)
-      else tempImg.push([])
-      if (doc.data().storagePath !== undefined)
-        tempStorePaths.push(doc.data().storagePath)
-      else tempStorePaths.push([])
-      if (doc.data().timeStamps !== undefined)
-        tempTimeStamps.push(doc.data().timeStamps)
-      else tempTimeStamps.push([])
 
-      return true
-    })
+    async function DATA_FROM_DB() {
+      const imagesInfo = collection(db, 'images')
+      const imagesDocs = await getDocs(imagesInfo)
+      var check = imagesDocs.docs.map((doc) => {
+        // tagNames.push(doc.data().name);
+        tempTag.push(doc.data().name)
+        if (doc.data().imgUrl !== undefined) tempImg.push(doc.data().imgUrl)
+        else tempImg.push([])
+        if (doc.data().storagePath !== undefined)
+          tempStorePaths.push(doc.data().storagePath)
+        else tempStorePaths.push([])
+        if (doc.data().timeStamps !== undefined)
+          tempTimeStamps.push(doc.data().timeStamps)
+        else tempTimeStamps.push([])
 
-    setTimeStamps(tempTimeStamps)
-    setImages(tempImg)
-    setTagNames(tempTag)
-    setStorePaths(tempStorePaths)
+        return true
+      })
 
-    console.log(tempImg)
-    console.log(tempTag)
-    console.log(tempStorePaths)
+      setTimeStamps(tempTimeStamps)
+      setImages(tempImg)
+      setTagNames(tempTag)
+      setStorePaths(tempStorePaths)
 
-    //rand images
-    var randomImages = []
-    for (let i = 0; i < tempImg.length; i++) {
-      for (let j = 0; j < tempImg[i].length; j++) {
-        randomImages.push(tempImg[i][j])
+      //  console.log(tempImg)
+      //  console.log(tempTag)
+      //  console.log(tempStorePaths)
+      //  return [tempImg, tempTag, tempStorePaths, tempTimeStamps]
+       getUserImages();
+    }
+
+      async function  getUserImages(){
+      //rand images
+      var randomImages = []
+      for (let i = 0; i < tempImg.length; i++) {
+        for (let j = 0; j < tempImg[i].length; j++) {
+          randomImages.push(tempImg[i][j])
+        }
       }
-    }
-    console.log(randomImages)
-    //shuffle
-    randomImages = shuffle(randomImages)
-    console.log(randomImages)
-    //get user images
-    const userInfo = collection(db, 'Users')
-    const queryForUsername = query(
-      userInfo,
-      where('userName', '==', 'UserName')
-    )
-    const userDoc = await getDocs(queryForUsername)
-    var userImageUrl_multi = userDoc.docs.map((doc) => doc.data().imagesUrl)
+      console.log(randomImages)
+      //shuffle
+      randomImages = SHUFFLE_ARRAY(randomImages)
+      console.log(randomImages)
+      //get user images
 
-   let userImageUrl = userImageUrl_multi[0].slice()
-    console.log(userImageUrl[0])
+      const userInfo = collection(db, 'Users')
+      const queryForUsername = query(
+        userInfo,
+        where('userName', '==',  userName )
+      )
+      const userDoc = await getDocs(queryForUsername)
+      var userImageUrl_multi = userDoc.docs.map((doc) => doc.data().imagesUrl)
+      console.log(userImageUrl_multi)
+      let userImageUrl = userImageUrl_multi[0].slice()
+      console.log(userImageUrl[0])
 
-    userImageUrl = shuffle(userImageUrl)
+      userImageUrl = SHUFFLE_ARRAY(userImageUrl)
+      setUserImageUrls(userImageUrl.slice())
 
-    setUserImageUrls(userImageUrl.slice())
+      console.log(userImageUrl)
 
-    console.log(userImageUrl)
+      // usetUserImages(userImageUrl)
 
-    // usetUserImages(userImageUrl)
+      var minImages = parseInt(userDoc.docs.map((doc) => doc.data().minImages))
+      var maxImages = parseInt(userDoc.docs.map((doc) => doc.data().maxImages))
 
-    var minImages = parseInt(userDoc.docs.map((doc) => doc.data().minImages))
-    var maxImages = parseInt(userDoc.docs.map((doc) => doc.data().maxImages))
+      console.log(minImages + maxImages)
+      let noOfImages = minImages + GET_RANDOM_INT(maxImages - minImages)
+      setNoOfImagess(noOfImages)
+      console.log('no of images' + noOfImages)
+      //hhhhh
+      const finalImages = new Set()
+      //set for images
 
-    console.log(minImages + maxImages)
-    let noOfImages=minImages + getRandomInt(maxImages - minImages);
-    setNoOfImagess(noOfImages)
-    console.log('no of images' + noOfImages)
-    const finalImages = new Set()
-    //set for images
-
-    for (let i = 0; i < noOfImages; i++) {
-      finalImages.add(userImageUrl[i])
-      console.log('hi')
-    }
-
-    let i = 0
-    while (1) {
-      if (finalImages.size === 9) {
-        break
+      for (let i = 0; i < noOfImages; i++) {
+        finalImages.add(userImageUrl[i])
+        console.log('hi')
       }
-      // console.log('hi')
-      finalImages.add(randomImages[i])
-      i++
-    }
-    
-    console.log(finalImages)
-    console.log(i)
+      let i = 0
+      console.log(randomImages)
+      while (true) {
+        if (finalImages.size === 9) {
+          break
+        }
+        // console.log('hi')
+        finalImages.add(randomImages[i])
+        i++
+      }
 
-    setUserImages(shuffle([...finalImages]))
-  }
+      console.log(finalImages)
+      console.log(i)
 
-  function getRandomInt(max) {
-    return Math.floor(Math.random() * max)
-  }
-  function shuffle(array) {
-    let currentIndex = array.length,
-      randomIndex
-
-    // While there remain elements to shuffle...
-    while (currentIndex !== 0) {
-      // Pick a remaining element...
-      randomIndex = Math.floor(Math.random() * currentIndex)
-      currentIndex--
-
-      // And swap it with the current element.
-      ;[array[currentIndex], array[randomIndex]] = [
-        array[randomIndex],
-        array[currentIndex],
-      ]
+      setUserImages(SHUFFLE_ARRAY([...finalImages]))
     }
 
-    return array
+    DATA_FROM_DB()
+    // getUserImages();
+  }, [])
+
+  
+
+  const obj = {
+    images: images,
+    // setImages: setImages,
+    tagNames: tagNames,
+    // setTagNames: setTagNames,
+    // checker: checker,
+    // setChecker: setChecker,
+    storePaths: storePaths,
+    // setStorePaths: setStorePaths,
+    timeStamps: timeStamps,
+    // setTimeStamps: setTimeStamps,
   }
 
-  useLayoutEffect(() => {
-    getImages()
-  }, [checker])
-
-
+ 
 
   console.log(tagNames)
-  const verifyPassword=()=>{
 
+  const verifyPassword = () => {
     console.log(noOfImagess)
     console.log(userImageUrls)
     if (userAns.length !== noOfImagess) {
@@ -187,7 +186,7 @@ function Display() {
       return
     }
     for (let i = 0; i < userAns.length; i++) {
-      let j=0;
+      let j = 0
       for (; j < userImageUrls.length; j++) {
         if (userImageUrls[j] === userAns[i]) {
           break
@@ -198,7 +197,7 @@ function Display() {
         return
       }
     }
-    alert('Login Complete');
+    alert('Login Complete')
   }
   return (
     <>
@@ -260,7 +259,6 @@ function Display() {
           <div className=' flex justify-between items-center text-4xl font-bold m-8'>
             <div>Selections made : {userAns.length}</div>
             <div>
-             
               <button onClick={verifyPassword}>Sign-in</button>
             </div>
           </div>
