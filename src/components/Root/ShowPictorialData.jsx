@@ -1,6 +1,6 @@
 import React, { useEffect, useLayoutEffect, useRef } from "react";
 import { useState } from "react";
-import './show.scss'
+import '../../style_static/show.scss'
 
 import db from '../../FireBase'
 import {

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import './InstructionPopUp.scss'
+import '../../style_static/InstructionPopUp.scss'
 import {
 
   CloseSquareOutlined,

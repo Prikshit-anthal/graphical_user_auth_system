@@ -1,5 +1,5 @@
 import React, { useLayoutEffect } from 'react'
-import './Nav.scss'
+import '../../style_static/Nav.scss'
 
 function Nav(props) {
   const Nav_content = props.Nav_content

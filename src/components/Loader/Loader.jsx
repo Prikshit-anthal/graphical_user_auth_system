@@ -1,5 +1,5 @@
 import React from "react";
-import "./Loader.scss"
+import '../../style_static/Loader.scss'
 
 function Loader(prop)
 {

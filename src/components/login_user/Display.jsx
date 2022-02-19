@@ -6,9 +6,9 @@ import Login from '../login_create_portal/Login'
 import { SHUFFLE_ARRAY, GET_RANDOM_INT } from '../../constants'
 import { DATA_FROM_DB } from '../../constants'
 import { Tag, Button, Select, Switch, Input } from 'antd'
-import './Display.scss'
+import '../../style_static/Display.scss'
 
-import '../create_update_user/SelectImgFromTag.scss'
+import '../../style_static/SelectImgFromTag.scss'
 
 import db from '../../FireBase'
 import {
