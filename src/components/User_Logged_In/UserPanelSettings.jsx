@@ -1,5 +1,5 @@
 import React, { useState, useRef, useLayoutEffect } from 'react'
-import '../../style_static/UserPanelSettings.scss'
+import './UserPanelSettings.scss'
 
 import {
   CaretDownOutlined,

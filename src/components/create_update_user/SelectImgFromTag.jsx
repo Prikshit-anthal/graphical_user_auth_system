@@ -1,5 +1,5 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react'
-import '../../style_static/SelectImgFromTag.scss'
+import './SelectImgFromTag.scss'
 import { Tag, Button , Select, Switch, Input } from 'antd'
 import db from '../../FireBase'
 import {
