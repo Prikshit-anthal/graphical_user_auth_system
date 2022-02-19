@@ -1,5 +1,9 @@
 import React, { useState, useLayoutEffect } from 'react'
 import './UserPanelSettings.scss'
+
+import { CaretRightOutlined,CloseSquareOutlined,CheckOutlined,EditOutlined   } from '@ant-design/icons'
+
+import { Tag, Button,Input, Select, Switch} from 'antd'
 import db from '../../FireBase'
 import {
   getStorage,
@@ -30,6 +34,7 @@ function UserPanelSettings(poops) {
   const [userName, setUserName] = useState(
     atob(localStorage.getItem('signInToken'))
   )
+  const [inputState,setInputState]=useState('enter');
 
   async function getUserNames() {
     let userInfo = collection(db, 'Users')
@@ -52,22 +57,19 @@ function UserPanelSettings(poops) {
     if (e.target.value.length === 0) {
       console.log('in')
       setCanSet(false)
-      e.target.parentNode.getElementsByClassName('validMark')[0].innerHTML =
-        'Enter'
+      setInputState('enter')
       return
     }
     for (let i = 0; i < userNamesTaken.length; i++) {
       if (e.target.value === userNamesTaken[i]) {
         boolCheck = true
-        e.target.parentNode.getElementsByClassName('validMark')[0].innerHTML =
-          'Invalid'
+        setInputState('invalid')
         setCanSet(false)
         break
       }
     }
     if (boolCheck === false) {
-      e.target.parentNode.getElementsByClassName('validMark')[0].innerHTML =
-        'Valid'
+      setInputState('valid')
       setCanSet(true)
     }
   }
@@ -111,44 +113,70 @@ function UserPanelSettings(poops) {
       <div>
         <div className='w-full text-2xl px-4 my-4 dropDownSettings flex justify-between'>
           User Account Settings
-          <button className=''>Arrow</button>
+          <div className=''>
+            <CaretRightOutlined />
+          </div>
         </div>
         <div className='px-4 my-4 flex justify-between'>
           <div>UserName</div>
-          <button>Edit</button>
+          <div className='pointerMe'>
+            <EditOutlined />
+          </div>
         </div>
         <div className='px-4 flex justify-between'>
-          <div className='flex'>
-            <input
+          <div className='flex items-center'>
+            <Input
               type='text'
               id='newUserName'
               onChange={(e) => {
                 validateNewUsername(e)
               }}
             />
-            <div className='validMark'>Enter</div>
+            <div className='validMark'>
+              {inputState === 'enetr' ? (
+                <EditOutlined />
+              ) : inputState === 'valid' ? (
+                <CheckOutlined />
+              ) : (
+                <CloseSquareOutlined/>
+              )}
+            </div>
           </div>
-          <button disabled={!canSet} onClick={setOnDB}>
+          <Button disabled={!canSet} onClick={setOnDB}>
             Set
-          </button>
+          </Button>
         </div>
         <div className='px-4 my-4 flex  justify-between'>
           <div> Password</div>
 
-          <button onClick={passChange}>Edit</button>
+          <div onClick={passChange} className='pointerMe'>
+            <EditOutlined />
+          </div>
         </div>
       </div>
       <div className='w-full text-2xl px-4 my-4 dropDownSettings flex justify-between'>
-        Fake<button className=''>Arrow</button>
+        Fake
+        <div className=''>
+          <CaretRightOutlined />
+        </div>
       </div>
       <div className='w-full text-2xl px-4 my-4 dropDownSettings flex justify-between'>
-        Fake<button className=''>Arrow</button>
+        Fake
+        <div className=''>
+          <CaretRightOutlined />
+        </div>
       </div>
       <div className='w-full text-2xl px-4 my-4 dropDownSettings flex justify-between'>
-        Fake<button className=''>Arrow</button>
+        Fake
+        <div className=''>
+          <CaretRightOutlined />
+        </div>
       </div>
       <div className='w-full text-2xl px-4 my-4 dropDownSettings flex justify-between'>
-        Fake<button className=''>Arrow</button>
+        Fake
+        <div className=''>
+          <CaretRightOutlined />
+        </div>
       </div>
     </div>
   )

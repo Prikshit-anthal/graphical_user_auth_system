@@ -1,5 +1,6 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react'
 import './SelectImgFromTag.scss'
+import { Tag, Button , Select, Switch, Input } from 'antd'
 import db from '../../FireBase'
 import {
   getStorage,
@@ -157,9 +158,12 @@ function SelectImgFromTag(poops) {
     <div className='sliderHere'>
       <div className='popUpHere'>
         <div className='w-full mt-12  flex justify-center items-center flex-col item'>
+          <div className='text-3xl my-4'>Images choses yet</div>
           <div className='w-10/12  flex flex-col  items-center imageBox'>
-            <div className='w-full text-4xl font-bold tagName text-center flex justify-between'>
-              <button
+            <div className='w-full text-4xl font-bold tagName text-center flex items-center justify-between'>
+              <Button
+                type='primary'
+                className='ml-2'
                 onClick={() => {
                   document.getElementsByClassName(
                     'popUpHere'
@@ -167,9 +171,11 @@ function SelectImgFromTag(poops) {
                 }}
               >
                 back
-              </button>
+              </Button>
               Selected
-              <button
+              <Button
+                type='primary'
+                className='mr-2'
                 onClick={() => {
                   setSelectionForPass((val) => {
                     for (let i = 0; i < val.length; i++) {
@@ -186,7 +192,7 @@ function SelectImgFromTag(poops) {
                 }}
               >
                 De-select all
-              </button>
+              </Button>
             </div>
             <div className='images'>
               {selectedForPass.map((val, idx) => {
@@ -204,6 +210,7 @@ function SelectImgFromTag(poops) {
           </div>
         </div>
       </div>
+      <div className='text-center my-4 text-3xl'>Choose images</div>
       <div
         className=' sliderContainer'
         style={{ transform: `translateX(-${activeIndex * 100}%)` }}
@@ -212,24 +219,28 @@ function SelectImgFromTag(poops) {
           return (
             <div className='w-full  flex justify-center items-center flex-col item'>
               <div className='w-10/12  flex flex-col  items-center imageBox'>
-                <div className='w-full text-4xl font-bold tagName text-center flex justify-between'>
-                  <button
+                <div className='w-full text-4xl font-bold tagName items-center  text-center flex justify-between'>
+                  <Button
+                    type='primary'
+                    className='ml-2'
                     onClick={() => {
                       setActiveIndex(activeIndex - 1)
                     }}
                     disabled={prevDisable}
                   >
                     prev
-                  </button>
+                  </Button>
                   {tag}
-                  <button
+                  <Button
+                    type='primary'
+                    className='mr-2'
                     onClick={() => {
                       setActiveIndex(activeIndex + 1)
                     }}
                     disabled={nextDisable}
                   >
                     next
-                  </button>
+                  </Button>
                 </div>
                 <div className='images'>
                   {images[idx].map((imageUrl, index) => {
@@ -296,10 +307,13 @@ function SelectImgFromTag(poops) {
           )
         })}
       </div>
-      <div className=' flex justify-between items-center text-4xl font-bold m-8'>
+      <div className='flex justify-center'>
+      <div className='flex w-full justify-between items-center text-3xl font-bold m-8' style={{maxWidth:'70vw'}}>
         <div>Selections made : {selectedForPass.length}</div>
         <div>
-          <button
+          <Button
+            type='primary'
+            className='mx-4'
             onClick={() => {
               let ref = document.getElementsByClassName('popUpHere')[0]
               if (ref.style.display === 'block') ref.style.display = 'none'
@@ -307,10 +321,15 @@ function SelectImgFromTag(poops) {
             }}
           >
             View
-          </button>
-          <button onClick={createNewUser}>Set</button>
+          </Button>
+          <Button type='primary' onClick={createNewUser}>
+            Set
+          </Button>
         </div>
       </div>
+      </div>
+
+     
     </div>
   )
 }

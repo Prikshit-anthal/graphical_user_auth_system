@@ -3,6 +3,7 @@ import { useState } from "react";
 import Nav from "../NavBar/Nav";
 import UserPanelSettings from "./UserPanelSettings";
 import { Nav_content } from '../../constants'
+import { Tag, Button, Select, Switch, Input } from 'antd'
 
 function UserPanel(poops)
 {

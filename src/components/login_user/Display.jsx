@@ -5,6 +5,7 @@ import SelectImgFromTag from '../create_update_user/SelectImgFromTag'
 import Login from '../login_create_portal/Login'
 import { SHUFFLE_ARRAY, GET_RANDOM_INT } from '../../constants'
 import { DATA_FROM_DB } from '../../constants'
+import { Tag, Button, Select, Switch, Input } from 'antd'
 
 import '../create_update_user/SelectImgFromTag.scss'
 
@@ -232,6 +233,7 @@ console.log(tagNames);
       {
         <div className='sliderHere'>
           <div className='w-full  flex justify-center items-center flex-col item'>
+            <div className='text-3xl my-4'>Give your Password</div>
             <div className='w-10/12  flex flex-col  items-center imageBox'>
               <div className='w-full text-4xl font-bold tagName text-center flex justify-center'>
                 Select Images
@@ -275,10 +277,14 @@ console.log(tagNames);
               </div>
             </div>
           </div>
-          <div className=' flex justify-between items-center text-4xl font-bold m-8'>
-            <div>Selections made : {userAns.length}</div>
-            <div>
-              <button onClick={verifyPassword}>Sign-in</button>
+          <div className='flex justify-center'>
+            <div className=' flex  w-full justify-between items-center text-3xl font-bold m-8' style={{maxWidth:'70vw'}}>
+              <div>Selections made : {userAns.length}</div>
+              <div>
+                <Button type='primary' onClick={verifyPassword}>
+                  Sign-in
+                </Button>
+              </div>
             </div>
           </div>
         </div>
