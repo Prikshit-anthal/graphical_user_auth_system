@@ -46,6 +46,21 @@ function Login(prop) {
     getUserNames()
   }, [])
 
+
+
+  const token = localStorage.getItem('signInToken')
+
+  let loggedinsecond=true;
+  if(token==null)
+  {
+    loggedinsecond=false;
+  }
+
+  if(loggedinsecond===true)
+  {
+    window.location.href = '/userPanel?userName=' + token
+  }
+  else{
   return (
     <div className='login-wrapper'>
       <div className='contact-wrapper'>
@@ -109,6 +124,8 @@ function Login(prop) {
       </div>
     </div>
   )
+            }
+            
 }
 
 export default Login

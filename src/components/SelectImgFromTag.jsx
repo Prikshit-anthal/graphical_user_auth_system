@@ -85,7 +85,7 @@ function SelectImgFromTag(poops) {
     })
     console.log('done');
     alert('Account made');
-    window.location.href='/'
+    window.location.href='/login'
   }
 
   return (

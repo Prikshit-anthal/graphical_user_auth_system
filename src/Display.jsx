@@ -53,13 +53,15 @@ console.log(tagNames);
   const [userImages, setUserImages] = useState([])
   const [uuserImages, usetUserImages] = useState([])
   const [userAns, setUserAns] = useState([])
-  var [noOfImagess, setNoOfImagess] = useState(0)
-  var [userImageUrls, setUserImageUrls] = useState([])
-
+  const [noOfImagess, setNoOfImagess] = useState(0)
+  const [userImageUrls, setUserImageUrls] = useState([])
+  const [loggedIn,setLoggedIn]=useState(false);
+  const [encryptUserName, setEncryptUserName] = useState()
 
   //db data from prop
   useLayoutEffect(() => {
       const params = new URL(document.location).searchParams
+      setEncryptUserName(params.get('userName'));
       var decrypted =atob( params.get('userName'))
       var userName=decrypted;
       console.log(userName)
@@ -171,8 +173,33 @@ console.log(tagNames);
         return
       }
     }
+    //token in browser memory
+    localStorage.setItem('signInToken', encryptUserName)
+    setLoggedIn(true);
     alert('Login Complete')
   }
+
+  const token = localStorage.getItem('signInToken')
+
+  let loggedinsecond=true;
+  if(token==null)
+  {
+    loggedinsecond=false;
+  }
+
+  if(loggedinsecond===true)
+  {
+    window.location.href = '/userPanel?userName=' + token
+  }
+  else if(loggedIn===true)
+  {
+    window.location.href = '/userPanel?userName=' + token
+
+  }
+  else{
+
+
+
   return (
     <>
       {/* <Nav navOption={navOption} setNavOption={setNavOption} />
@@ -241,6 +268,7 @@ console.log(tagNames);
       }
     </>
   )
+    }
 }
 
 export default Display
