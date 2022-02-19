@@ -1,7 +1,6 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Display from './components/login_user/Display'
-import './App.css'
 import Login from './components/login_create_portal/Login'
 import SelectImgFromTag from './components/create_update_user/SelectImgFromTag'
 import InstructionPopUp from './components/Instruction_pop_up/InstructionPopUp'

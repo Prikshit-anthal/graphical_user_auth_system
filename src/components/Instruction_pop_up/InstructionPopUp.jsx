@@ -1,5 +1,10 @@
 import React, { useEffect } from 'react'
 import './InstructionPopUp.scss'
+import {
+
+  CloseSquareOutlined,
+
+} from '@ant-design/icons'
 
 function InstructionPopUp() {
   useEffect(() => {
@@ -25,7 +30,7 @@ function InstructionPopUp() {
               }}
               
             >
-              Close
+             <CloseSquareOutlined/>
             </a>
           </div>
 
