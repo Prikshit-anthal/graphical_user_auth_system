@@ -7,7 +7,15 @@ overflow: hidden;
     
 
 }
+.hiddenToSlide{
+height:0;
+}
+.visibleToSlide{
+height:100%;
+}
+
 .pointerMe{
     cursor:pointer
 }
+
 }
