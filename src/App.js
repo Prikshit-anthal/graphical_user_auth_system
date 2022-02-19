@@ -1,14 +1,12 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import Display from './Display'
+import Display from './components/login_user/Display'
 import './App.css'
-import Login from './Login'
-import SelectImgFromTag from './components/SelectImgFromTag'
-import { DATA_FROM_DB } from './constants'
-import InstructionPopUp from './components/InstructionPopUp'
-import UserPanel from './components/UserPanel'
-import NewPassword from './components/NewPassword'
-import Loader from './components/Loader'
+import Login from './components/login_create_portal/Login'
+import SelectImgFromTag from './components/create_update_user/SelectImgFromTag'
+import InstructionPopUp from './components/Instruction_pop_up/InstructionPopUp'
+import UserPanel from './components/User_Logged_In/UserPanel'
+import Loader from './components/Loader/Loader'
 
 import db from './FireBase'
 import {
@@ -113,7 +111,6 @@ const obj = {
           path='/userPanel'
           element={<UserPanel LOADER={setDisplayLoader} />}
         />
-        <Route path='/changePass' element={<NewPassword />} />
       </Routes>
     </>
   )

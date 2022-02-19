@@ -1,6 +1,6 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react'
 import './SelectImgFromTag.scss'
-import db from '../FireBase'
+import db from '../../FireBase'
 import {
   getStorage,
   ref,

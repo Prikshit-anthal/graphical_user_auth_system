@@ -2,7 +2,7 @@ import React, { useEffect, useLayoutEffect, useRef } from "react";
 import { useState } from "react";
 import './show.scss'
 
-import db from '../FireBase'
+import db from '../../FireBase'
 import {
   getStorage,
   ref,

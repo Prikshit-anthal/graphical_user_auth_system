@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import Nav from './components/Nav'
+import Nav from '../NavBar/Nav'
 import { useLayoutEffect } from 'react'
-import SetPictorialData from './components/SetPictorialData'
-import ShowPictorialData from './components/ShowPictorialData'
-import SelectImgFromTag from './components/SelectImgFromTag'
-import Login from './Login'
-import { SHUFFLE_ARRAY, GET_RANDOM_INT } from './constants'
-import { DATA_FROM_DB } from './constants'
+import SelectImgFromTag from '../create_update_user/SelectImgFromTag'
+import Login from '../login_create_portal/Login'
+import { SHUFFLE_ARRAY, GET_RANDOM_INT } from '../../constants'
+import { DATA_FROM_DB } from '../../constants'
 
-import './components/SelectImgFromTag.scss'
+import '../create_update_user/SelectImgFromTag.scss'
 
-import db from './FireBase'
+import db from '../../FireBase'
 import {
   getStorage,
   ref,

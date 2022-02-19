@@ -1,8 +1,8 @@
 import React from "react";
 import { useState } from "react";
-import Nav from "./Nav";
+import Nav from "../NavBar/Nav";
 import UserPanelSettings from "./UserPanelSettings";
-import { Nav_content } from '../constants'
+import { Nav_content } from '../../constants'
 
 function UserPanel(poops)
 {

@@ -1,6 +1,6 @@
 import React, { useState, useLayoutEffect } from 'react'
 import './UserPanelSettings.scss'
-import db from '../FireBase'
+import db from '../../FireBase'
 import {
   getStorage,
   ref,

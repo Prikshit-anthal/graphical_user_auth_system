@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useLayoutEffect, useRef } from 'react'
 import './Login.scss'
-import InstructionPopUp from './components/InstructionPopUp'
-import db from './FireBase'
+import InstructionPopUp from '../Instruction_pop_up/InstructionPopUp'
+import db from '../../FireBase'
 import { collection, getDocs } from 'firebase/firestore'
 
 function Login(prop) {
