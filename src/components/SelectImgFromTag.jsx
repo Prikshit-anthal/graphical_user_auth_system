@@ -35,6 +35,8 @@ function SelectImgFromTag(poops) {
     setTimeStamps,
   } = poops.DB_DATA
 
+  const Loader = poops.LOADER
+
   const [activeIndex, setActiveIndex] = useState(0)
   const [nextDisable, setNextDisable] = useState(false)
   const [prevDisable, setPrevDisable] = useState(true)
@@ -46,11 +48,24 @@ function SelectImgFromTag(poops) {
   console.log(selectedForPass)
 
   useLayoutEffect(() => {
+   Loader(true)
+
+    let timer1 = setTimeout(() => {
+      //loader off
+      //loading img time
+      Loader(false)
+    }, 3000)
+   
     const params = new URL(document.location).searchParams
     var decrypted = atob(params.get('userName'))
     setType(atob(params.get('type')))
     setUserName(decrypted)
     console.log(userName)
+
+     return () => {
+       clearTimeout(timer1)
+     }
+    
   }, [userName])
 
   useEffect(() => {
@@ -62,10 +77,12 @@ function SelectImgFromTag(poops) {
       setPrevDisable(false)
     }
 
+    
     //    console.log('hi'+activeIndex)
   }, [activeIndex])
 
   const createNewUser = async () => {
+
     if (selectedForPass.length === 4) {
       alert('Min 5 imgs to be selected for password')
       return
@@ -82,6 +99,9 @@ function SelectImgFromTag(poops) {
 
     //if new account
     if (type === 'create') {
+      //loader on
+      Loader(true)
+
       const timeStamp = String(new Date().getTime())
       //username check left still
       await setDoc(doc(db, 'Users', timeStamp), {
@@ -94,11 +114,17 @@ function SelectImgFromTag(poops) {
       })
       console.log('done')
       alert('Account made')
+      //loader off
+      Loader(false)
       window.location.href = '/login'
     }
 
     ///if updating passs
     else if (type === 'update') {
+
+      //Loader on
+      Loader(true);
+
       //get timestamp of user files
       const userInfo = collection(db, 'Users')
       const queryForUsername = query(
@@ -120,6 +146,8 @@ function SelectImgFromTag(poops) {
         timeStamp: userImageUrl_multi[0],
       })
       alert('update done')
+      //loader off
+      Loader(false);
       localStorage.removeItem('signInToken');
       window.location.href = '/login';
     }

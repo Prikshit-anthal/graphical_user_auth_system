@@ -21,7 +21,10 @@ import {
   query,
 } from 'firebase/firestore'
 
-function UserPanelSettings() {
+function UserPanelSettings(poops) {
+
+  const Loader = poops.LOADER
+
   const [userNamesTaken, setUserNamesTaken] = useState([])
   const [canSet, setCanSet] = useState(false)
   const [userName, setUserName] = useState(
@@ -70,6 +73,10 @@ function UserPanelSettings() {
   }
 
   const setOnDB = async () => {
+
+    //Loader on
+    Loader(true);
+
     //get timestamp
     const userInfo = collection(db, 'Users')
     const queryForUsername = query(userInfo, where('userName', '==', userName))
@@ -86,15 +93,11 @@ function UserPanelSettings() {
 
     alert('update done New userName : ' + newName)
 
+    Loader(false);
+    
     localStorage.removeItem('signInToken')
     window.location.href = '/login'
-    // localStorage.setItem('signInToken', btoa(newName))
-    // //  console.log(localStorage.getItem('signInToken', newName))
 
-    // setUserName(newName)
-
-    // document.getElementById('newUserName').value = ''
-    // setCanSet(false)
   }
 
   const passChange = () => {

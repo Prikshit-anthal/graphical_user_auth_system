@@ -4,8 +4,12 @@ import Nav from "./Nav";
 import UserPanelSettings from "./UserPanelSettings";
 import { Nav_content } from '../constants'
 
-function UserPanel()
+function UserPanel(poops)
 {
+  
+  const Loader = poops.LOADER;
+  // console.log(Loader)
+
     const [buttonNoClicked,setButtonNoClicked]=useState(0);
 
   const token = localStorage.getItem('signInToken')
@@ -30,7 +34,7 @@ function UserPanel()
         <div className='ml-64 '>
           {buttonNoClicked === 1 ? (
             <div>
-              <UserPanelSettings />
+              <UserPanelSettings LOADER={Loader} />
             </div>
           ) : (
             <div>

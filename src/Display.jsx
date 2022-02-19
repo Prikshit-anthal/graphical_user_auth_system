@@ -46,6 +46,8 @@ function Display(poops) {
     setTimeStamps,
   } = poops.DB_DATA
 
+  const Loader=poops.LOADER;
+
 
 console.log(images);
 console.log(tagNames);
@@ -67,14 +69,15 @@ console.log(tagNames);
 
   //db data from prop
   useLayoutEffect(() => {
-      setEncryptUserName(params.get('userName'))
-   var decrypted = atob(params.get('userName'))
-   var userName = decrypted
-   console.log(userName)
+    //loader on
+    Loader(true)
 
-   
+    setEncryptUserName(params.get('userName'))
+    var decrypted = atob(params.get('userName'))
+    var userName = decrypted
+    console.log(userName)
 
-      async function  getUserImages(){
+    async function getUserImages() {
       //rand images
       var randomImages = []
       for (let i = 0; i < images.length; i++) {
@@ -91,7 +94,7 @@ console.log(tagNames);
       const userInfo = collection(db, 'Users')
       const queryForUsername = query(
         userInfo,
-        where('userName', '==',  userName )
+        where('userName', '==', userName)
       )
       const userDoc = await getDocs(queryForUsername)
       var userImageUrl_multi = userDoc.docs.map((doc) => doc.data().imagesUrl)
@@ -128,18 +131,15 @@ console.log(tagNames);
           break
         }
         // console.log('hi')
-        let boolCheck=true;
+        let boolCheck = true
 
         //checking if random images match selected images
         //dont take images selected by user as pass here as they are already taken
-        for(let j=0;j<userImageUrl.length;j++)
-        {
-             if(userImageUrl[j]===randomImages[i])
-             boolCheck=false;
+        for (let j = 0; j < userImageUrl.length; j++) {
+          if (userImageUrl[j] === randomImages[i]) boolCheck = false
         }
 
-        if(boolCheck===true)
-        finalImages.add(randomImages[i])
+        if (boolCheck === true) finalImages.add(randomImages[i])
         i++
       }
 
@@ -147,13 +147,19 @@ console.log(tagNames);
       console.log(i)
 
       setUserImages(SHUFFLE_ARRAY([...finalImages]))
+
+      let timer1 = setTimeout(() =>{//loader off
+        //2 sec for img load
+      Loader(false)},  2000);
+      return () => {
+        clearTimeout(timer1);
+      }
     }
 
     // DATA_FROM_DB()
     //it is imp as on first render images is empty not come yet
     //if it goes inside it encounters errors due to being empty
-    if(images.length!==0)
-    getUserImages();
+    if (images.length !== 0) getUserImages()
   }, [images])
 
 

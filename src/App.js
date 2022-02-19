@@ -8,6 +8,7 @@ import { DATA_FROM_DB } from './constants'
 import InstructionPopUp from './components/InstructionPopUp'
 import UserPanel from './components/UserPanel'
 import NewPassword from './components/NewPassword'
+import Loader from './components/Loader'
 
 import db from './FireBase'
 import {
@@ -45,6 +46,7 @@ function App() {
       const [checker, setChecker] = useState(false)
       const [storePaths, setStorePaths] = useState([])
       const [timeStamps, setTimeStamps] = useState([])
+      const [displayLoader,setDisplayLoader]=useState(false);
 
        async function DATA_FROM_DB() {
          const imagesInfo = collection(db, 'images')
@@ -68,11 +70,6 @@ function App() {
          setImages(tempImg)
          setTagNames(tempTag)
          setStorePaths(tempStorePaths)
-
-         //  console.log(tempImg)
-         //  console.log(tempTag)
-         //  console.log(tempStorePaths)
-         //  return [tempImg, tempTag, tempStorePaths, tempTimeStamps]
        }
 
 useLayoutEffect(() => {
@@ -98,17 +95,24 @@ const obj = {
 
   return (
     <>
+      <Loader display={displayLoader} />
       <Routes>
         <Route path='/login' element={<Login type={'login'} />} />
         <Route path='/' element={<InstructionPopUp />} />
 
         <Route path='/create' element={<Login type={'create'} />} />
-        <Route path='/display' element={<Display DB_DATA={obj} />} />
+        <Route
+          path='/display'
+          element={<Display DB_DATA={obj} LOADER={setDisplayLoader} />}
+        />
         <Route
           path='/createUserPassword'
-          element={<SelectImgFromTag DB_DATA={obj} />}
+          element={<SelectImgFromTag LOADER={setDisplayLoader} DB_DATA={obj} />}
         />
-        <Route path='/userPanel' element={<UserPanel />} />
+        <Route
+          path='/userPanel'
+          element={<UserPanel LOADER={setDisplayLoader} />}
+        />
         <Route path='/changePass' element={<NewPassword />} />
       </Routes>
     </>
