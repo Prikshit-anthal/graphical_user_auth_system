@@ -5,7 +5,7 @@ function Nav(props) {
   const Nav_content = props.Nav_content
   const { buttonNoClicked, setButtonNoClicked } = props.buttonNoClicked
 
-  console.log(Nav_content)
+  // console.log(Nav_content)
 
   useLayoutEffect(() => {
     let refs = document.querySelectorAll('[data-no]')

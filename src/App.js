@@ -7,6 +7,8 @@ import SelectImgFromTag from './components/SelectImgFromTag'
 import { DATA_FROM_DB } from './constants'
 import InstructionPopUp from './components/InstructionPopUp'
 import UserPanel from './components/UserPanel'
+import NewPassword from './components/NewPassword'
+
 import db from './FireBase'
 import {
   getStorage,
@@ -106,10 +108,8 @@ const obj = {
           path='/createUserPassword'
           element={<SelectImgFromTag DB_DATA={obj} />}
         />
-        <Route
-          path='/userPanel'
-          element={<UserPanel />}
-        />
+        <Route path='/userPanel' element={<UserPanel />} />
+        <Route path='/changePass' element={<NewPassword />} />
       </Routes>
     </>
   )

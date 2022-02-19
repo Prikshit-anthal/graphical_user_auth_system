@@ -57,15 +57,20 @@ console.log(tagNames);
   const [userImageUrls, setUserImageUrls] = useState([])
   const [loggedIn,setLoggedIn]=useState(false);
   const [encryptUserName, setEncryptUserName] = useState()
+  
+  
+  const params = new URL(document.location).searchParams
+  const type = atob(params.get('type'));
+  
+
+
 
   //db data from prop
   useLayoutEffect(() => {
-      const params = new URL(document.location).searchParams
-      setEncryptUserName(params.get('userName'));
-      var decrypted =atob( params.get('userName'))
-      var userName=decrypted;
-      console.log(userName)
-
+      setEncryptUserName(params.get('userName'))
+   var decrypted = atob(params.get('userName'))
+   var userName = decrypted
+   console.log(userName)
 
    
 
@@ -173,16 +178,27 @@ console.log(tagNames);
         return
       }
     }
+    if(type==='login'){
     //token in browser memory
     localStorage.setItem('signInToken', encryptUserName)
     setLoggedIn(true);
     alert('Login Complete')
+    }
+    else{
+        alert('2nd type');
+        window.location.href =
+          '/createUserPassword?userName=' +
+          encryptUserName +
+          '&type=' +
+          btoa('update')
+    }
   }
+
 
   const token = localStorage.getItem('signInToken')
 
   let loggedinsecond=true;
-  if(token==null)
+  if(token==null || type!=='login')
   {
     loggedinsecond=false;
   }

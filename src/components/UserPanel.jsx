@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import Nav from "./Nav";
+import UserPanelSettings from "./UserPanelSettings";
 import { Nav_content } from '../constants'
 
 function UserPanel()
@@ -21,10 +22,22 @@ function UserPanel()
       <div>
         <Nav
           Nav_content={Nav_content}
-          buttonNoClicked={{buttonNoClicked:buttonNoClicked, setButtonNoClicked:setButtonNoClicked}}
+          buttonNoClicked={{
+            buttonNoClicked: buttonNoClicked,
+            setButtonNoClicked: setButtonNoClicked,
+          }}
         />
-        <div className='ml-64 m-4 '>
-          <div className='ml-4'>Done</div>
+        <div className='ml-64 '>
+          {buttonNoClicked === 1 ? (
+            <div>
+              <UserPanelSettings />
+            </div>
+          ) : (
+            <div>
+              <div>Hi {atob(localStorage.getItem('signInToken'))}!!</div>
+              User Working space
+            </div>
+          )}
         </div>
       </div>
     )

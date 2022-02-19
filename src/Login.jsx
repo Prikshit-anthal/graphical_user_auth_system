@@ -20,7 +20,7 @@ function Login(prop) {
       return
     }
 
-    window.location.href = '/display?userName=' + btoa(name)
+    window.location.href = '/display?userName=' + btoa(name)+'&type='+btoa('login')
   }
 
   function createAccount(name) {
@@ -30,7 +30,7 @@ function Login(prop) {
         return
       }
     })
-    window.location.href = '/createUserPassword?userName=' + btoa(name)
+    window.location.href = '/createUserPassword?userName=' + btoa(name)+'&type'+btoa('create')
     //  console.log('Created')
   }
 
