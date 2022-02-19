@@ -5,6 +5,7 @@ import './App.css'
 import Login from './Login'
 import SelectImgFromTag from './components/SelectImgFromTag'
 import { DATA_FROM_DB } from './constants'
+import InstructionPopUp from './components/InstructionPopUp'
 import db from './FireBase'
 import {
   getStorage,
@@ -95,10 +96,15 @@ const obj = {
   return (
     <>
       <Routes>
-        <Route path='/' element={<Login type={'login'} />} />
+        <Route path='/login' element={<Login type={'login'} />} />
+        <Route path='/' element={<InstructionPopUp />} />
+
         <Route path='/create' element={<Login type={'create'} />} />
         <Route path='/display' element={<Display DB_DATA={obj} />} />
-        <Route path='/createUserPassword' element={<SelectImgFromTag DB_DATA={obj} />} />
+        <Route
+          path='/createUserPassword'
+          element={<SelectImgFromTag DB_DATA={obj} />}
+        />
       </Routes>
     </>
   )

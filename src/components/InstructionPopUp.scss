@@ -1,0 +1,84 @@
+.instruction-popup{
+    #overlay {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: #000;
+filter:alpha(opacity=70);
+-moz-opacity:0.7;
+-khtml-opacity: 0.7;
+opacity: 0.7;
+z-index: 100;
+display: none;
+}
+.cnt223 a{
+text-decoration: none;
+}
+.popup-onload{
+    top: 0;
+left: 0;
+width: 100%;
+min-height: 100vh;
+margin: 0 auto;
+display: none;
+justify-content: center;
+align-items: center;
+position: fixed;
+z-index: 101;
+}
+.cnt223{
+// min-width: 600px;
+// width: 600px;
+// min-height: 150px;
+// margin: auto auto;
+width:80%;
+max-width: 600px;
+background: #f3f3f3;
+position: relative;
+z-index: 103;
+padding: 15px 35px;
+border-radius: 5px;
+box-shadow: 0 2px 5px #000;
+}
+.cnt223 p{
+clear: both;
+    color: #555555;
+    /* text-align: justify; */
+    font-size: 20px;
+    font-family: sans-serif;
+}
+.cnt223 p a{
+color: #d91900;
+font-weight: bold;
+}
+.cnt223 .x{
+float: right;
+height: 35px;
+left: 22px;
+position: relative;
+top: -25px;
+width: 34px;
+}
+.cnt223 .x:hover{
+cursor: pointer;
+}
+@media only screen and (max-width: 500px) {
+  .cnt223 .topic{
+      font-size: 1rem;
+  }
+  .cnt223 ol{
+      font-size: 0.7rem;
+  }
+
+}
+@media only screen and (max-width: 400px) {
+ 
+  .cnt223 ol{
+      margin-left: 0.5rem; 
+     margin-right: 0.5rem;
+  }
+
+}
+}
