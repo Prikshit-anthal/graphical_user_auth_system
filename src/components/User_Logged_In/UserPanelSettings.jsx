@@ -113,7 +113,7 @@ function UserPanelSettings(poops) {
 
   return (
     <div className='user-setting-container'>
-      <div className='text-3xl ml-4 my-4'>Settings</div>
+      <div className='text-3xl ml-4 my-4 user-setting-content'>Settings</div>
       <div>
         <div className='w-full text-2xl px-4 my-4 dropDownSettings flex justify-between'>
           User Account Settings
@@ -153,9 +153,9 @@ function UserPanelSettings(poops) {
             style={{
               overflow: 'hidden',
               display: 'flex',
-              justifyContent:'space-between',
-              paddingLeft:'1rem',
-              paddingRight:'1rem',
+              justifyContent: 'space-between',
+              paddingLeft: '1rem',
+              paddingRight: '1rem',
             }}
             className='hiddenToSlide'
           >
@@ -163,7 +163,6 @@ function UserPanelSettings(poops) {
               <Input
                 type='text'
                 id='newUserName'
-                
                 onChange={(e) => {
                   validateNewUsername(e)
                 }}
@@ -178,7 +177,7 @@ function UserPanelSettings(poops) {
                 )}
               </div>
             </div>
-            <Button type='primary' disabled={!canSet} onClick={setOnDB}>
+            <Button type='primary' className='fontSizeMatters' disabled={!canSet} onClick={setOnDB}>
               Set
             </Button>
           </div>

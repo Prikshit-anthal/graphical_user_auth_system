@@ -32,7 +32,7 @@ function UserPanel(poops)
             setButtonNoClicked: setButtonNoClicked,
           }}
         />
-        <div className='ml-64 '>
+        <div className='ml-48 contentArea'>
           {buttonNoClicked === 1 ? (
             <div>
               <UserPanelSettings LOADER={Loader} />

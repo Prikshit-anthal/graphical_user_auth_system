@@ -6,6 +6,7 @@ import Login from '../login_create_portal/Login'
 import { SHUFFLE_ARRAY, GET_RANDOM_INT } from '../../constants'
 import { DATA_FROM_DB } from '../../constants'
 import { Tag, Button, Select, Switch, Input } from 'antd'
+import './Display.scss'
 
 import '../create_update_user/SelectImgFromTag.scss'
 
@@ -126,7 +127,7 @@ console.log(tagNames);
       let i = 0
       console.log(randomImages)
       while (true) {
-        if (finalImages.size === 9) {
+        if (finalImages.size === 15) {
           break
         }
         // console.log('hi')
@@ -233,15 +234,17 @@ console.log(tagNames);
       {
         <div className='sliderHere'>
           <div className='w-full  flex justify-center items-center flex-col item'>
-            <div className='text-3xl my-4'>Give your Password</div>
+            <div className='text-3xl my-4 fontSizeMatters'>
+              Give your Password
+            </div>
             <div className='w-10/12  flex flex-col  items-center imageBox'>
-              <div className='w-full text-4xl font-bold tagName text-center flex justify-center'>
+              <div className='w-full text-3xl font-bold tagName text-center flex justify-center fontSizeMatters'>
                 Select Images
               </div>
               <div className='images'>
                 {userImages.map((imageUrl, index) => {
                   return (
-                    <div>
+                    <div key={index}>
                       <img
                         src={imageUrl}
                         alt='SOS'
@@ -278,10 +281,13 @@ console.log(tagNames);
             </div>
           </div>
           <div className='flex justify-center'>
-            <div className=' flex  w-full justify-between items-center text-3xl font-bold m-8' style={{maxWidth:'70vw'}}>
+            <div
+              className=' flex  w-full justify-between items-center text-3xl font-bold my-8 fontSizeMatters yeahFontMatters'
+              style={{ maxWidth: '70vw' }}
+            >
               <div>Selections made : {userAns.length}</div>
               <div>
-                <Button type='primary' onClick={verifyPassword}>
+                <Button className='yeahFontMattersAgain' type='primary' onClick={verifyPassword}>
                   Sign-in
                 </Button>
               </div>

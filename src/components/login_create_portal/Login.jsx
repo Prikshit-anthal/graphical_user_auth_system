@@ -24,12 +24,16 @@ function Login(prop) {
   }
 
   function createAccount(name) {
+    let check=false;
     userNameData.forEach((val, idx) => {
       if (val === name) {
         alert('Username already taken')
-        return
+        check=true;
       }
     })
+    if(check===true)
+     return
+     else
     window.location.href = '/createUserPassword?userName=' + btoa(name)+'&type='+btoa('create')
     //  console.log('Created')
   }

@@ -9,7 +9,7 @@ function Loader(prop)
     return (
       <div className='loader-container' style={{ display: displayStyle }}>
         {' '}
-        <div class='loading'></div>
+        <div className='loading'></div>
       </div>
     )
 }

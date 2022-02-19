@@ -84,7 +84,9 @@ function SelectImgFromTag(poops) {
 
   const createNewUser = async () => {
 
-    if (selectedForPass.length === 4) {
+console.log(selectedForPass.length)
+console.log(selectedForPass)
+    if (selectedForPass.length < 5) {
       alert('Min 5 imgs to be selected for password')
       return
     }
@@ -158,12 +160,12 @@ function SelectImgFromTag(poops) {
     <div className='sliderHere'>
       <div className='popUpHere'>
         <div className='w-full mt-12  flex justify-center items-center flex-col item'>
-          <div className='text-3xl my-4'>Images choses yet</div>
+          <div className='text-2xl my-4 head'>Images chosen yet</div>
           <div className='w-10/12  flex flex-col  items-center imageBox'>
-            <div className='w-full text-4xl font-bold tagName text-center flex items-center justify-between'>
+            <div className='w-full subHead text-4xl font-bold tagName text-center flex items-center justify-between'>
               <Button
                 type='primary'
-                className='ml-2'
+                className='ml-2 buttons'
                 onClick={() => {
                   document.getElementsByClassName(
                     'popUpHere'
@@ -175,7 +177,7 @@ function SelectImgFromTag(poops) {
               Selected
               <Button
                 type='primary'
-                className='mr-2'
+                className='mr-2 buttons'
                 onClick={() => {
                   setSelectionForPass((val) => {
                     for (let i = 0; i < val.length; i++) {
@@ -191,13 +193,13 @@ function SelectImgFromTag(poops) {
                   })
                 }}
               >
-                De-select all
+                Uncheck-All
               </Button>
             </div>
             <div className='images'>
               {selectedForPass.map((val, idx) => {
                 return (
-                  <div>
+                  <div key={idx}>
                     <img
                       src={images[val[0]][val[1]]}
                       className='selected'
@@ -210,19 +212,22 @@ function SelectImgFromTag(poops) {
           </div>
         </div>
       </div>
-      <div className='text-center my-4 text-3xl'>Choose images</div>
+      <div className='text-center head my-4 text-3xl'>Choose images</div>
       <div
         className=' sliderContainer'
         style={{ transform: `translateX(-${activeIndex * 100}%)` }}
       >
         {tagNames.map((tag, idx) => {
           return (
-            <div className='w-full  flex justify-center items-center flex-col item'>
+            <div
+              key={idx}
+              className='w-full  flex justify-center items-center flex-col item'
+            >
               <div className='w-10/12  flex flex-col  items-center imageBox'>
-                <div className='w-full text-4xl font-bold tagName items-center  text-center flex justify-between'>
+                <div className='w-full text-3xl font-bold tagName subHead items-center  text-center flex justify-between'>
                   <Button
                     type='primary'
-                    className='ml-2'
+                    className='ml-2 buttons'
                     onClick={() => {
                       setActiveIndex(activeIndex - 1)
                     }}
@@ -233,7 +238,7 @@ function SelectImgFromTag(poops) {
                   {tag}
                   <Button
                     type='primary'
-                    className='mr-2'
+                    className='mr-2 buttons'
                     onClick={() => {
                       setActiveIndex(activeIndex + 1)
                     }}
@@ -245,7 +250,7 @@ function SelectImgFromTag(poops) {
                 <div className='images'>
                   {images[idx].map((imageUrl, index) => {
                     return (
-                      <div>
+                      <div key={index}>
                         <img
                           src={imageUrl}
                           alt='SOS'
@@ -308,28 +313,29 @@ function SelectImgFromTag(poops) {
         })}
       </div>
       <div className='flex justify-center'>
-      <div className='flex w-full justify-between items-center text-3xl font-bold m-8' style={{maxWidth:'70vw'}}>
-        <div>Selections made : {selectedForPass.length}</div>
-        <div>
-          <Button
-            type='primary'
-            className='mx-4'
-            onClick={() => {
-              let ref = document.getElementsByClassName('popUpHere')[0]
-              if (ref.style.display === 'block') ref.style.display = 'none'
-              else ref.style.display = 'block'
-            }}
-          >
-            View
-          </Button>
-          <Button type='primary' onClick={createNewUser}>
-            Set
-          </Button>
+        <div
+          className='flex w-full justify-between items-center text-2xl font-bold mt-8 bottom'
+          style={{ maxWidth: '70vw' }}
+        >
+          <div>Selections:{selectedForPass.length}</div>
+          <div>
+            <Button
+              type='primary'
+              className='mx-4 buttons'
+              onClick={() => {
+                let ref = document.getElementsByClassName('popUpHere')[0]
+                if (ref.style.display === 'block') ref.style.display = 'none'
+                else ref.style.display = 'block'
+              }}
+            >
+              View
+            </Button>
+            <Button type='primary' className='buttons' onClick={createNewUser}>
+              Set
+            </Button>
+          </div>
         </div>
       </div>
-      </div>
-
-     
     </div>
   )
 }

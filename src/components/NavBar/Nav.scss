@@ -16,3 +16,21 @@ top: 0px;
     position: absolute;
 }
 }
+@media only screen and (max-width: 600px) {
+ .contentArea{
+  margin-left: 8rem;
+ }
+ .left-nav-bar{
+     width: 8rem;
+ }
+ .left-nav-body{
+     font-size: 0.7rem;
+ }
+ .left-nav-title{
+     width: 100%;
+     font-size: 2rem;
+ }
+ .left-nav-foot{
+     font-size: 1rem;
+ }
+}

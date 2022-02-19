@@ -20,7 +20,7 @@ function Nav(props) {
 
   return (
     <>
-      <div className='left-nav-bar w-64'>
+      <div className='left-nav-bar w-48'>
         <div className='left-nav-title text-center w-44 text-4xl mt-4'>
           {Nav_content.title}
         </div>

@@ -39,6 +39,25 @@
         box-shadow: 0 0 10px;
         }
     }
+    @media only screen and (max-width: 600px) {
+ .head,.subHead{
+     font-size: 1.5rem;
+ }
+ .bottom{
+     font-size: 1rem;
+ }
+ 
+}
+ @media only screen and (max-width: 600px) {
+.buttons{
+    padding:2px 8px;
+    margin-left: 0;
+    margin-right: 1px;
+}
+.tagName{
+    font-size: 1rem;
+}
+ }
 }
 .sliderContainer{
    
