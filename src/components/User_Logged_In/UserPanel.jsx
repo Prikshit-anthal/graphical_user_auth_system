@@ -40,7 +40,11 @@ function UserPanel(poops)
           ) : (
             <div>
               <div>Hi {atob(localStorage.getItem('signInToken'))}!!</div>
-              User Working space
+              User Working space.
+              <div>
+               User account Setting functionality works even css is not much good there :(
+              </div>
+
             </div>
           )}
         </div>

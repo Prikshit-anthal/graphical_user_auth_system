@@ -212,7 +212,9 @@ console.log(selectedForPass)
           </div>
         </div>
       </div>
-      <div className='text-center head my-4 text-3xl'>Choose images</div>
+      <div className='text-center head my-4 text-3xl'>
+        {type === 'create'?'Choose images':'Choose new pass'}
+      </div>
       <div
         className=' sliderContainer'
         style={{ transform: `translateX(-${activeIndex * 100}%)` }}

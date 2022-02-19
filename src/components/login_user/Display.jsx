@@ -235,7 +235,7 @@ console.log(tagNames);
         <div className='sliderHere'>
           <div className='w-full  flex justify-center items-center flex-col item'>
             <div className='text-3xl my-4 fontSizeMatters'>
-              Give your Password
+              {type === 'login' ? <>Give your Password</> : <>Validate its you</>}
             </div>
             <div className='w-10/12  flex flex-col  items-center imageBox'>
               <div className='w-full text-3xl font-bold tagName text-center flex justify-center fontSizeMatters'>
@@ -287,8 +287,12 @@ console.log(tagNames);
             >
               <div>Selections made : {userAns.length}</div>
               <div>
-                <Button className='yeahFontMattersAgain' type='primary' onClick={verifyPassword}>
-                  Sign-in
+                <Button
+                  className='yeahFontMattersAgain'
+                  type='primary'
+                  onClick={verifyPassword}
+                >
+                  {type === 'login' ? <>Sign-in</> : <>validate</>}
                 </Button>
               </div>
             </div>
