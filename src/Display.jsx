@@ -189,17 +189,14 @@ console.log(tagNames);
 
   if(loggedinsecond===true)
   {
-    window.location.href = '/userPanel?userName=' + token
+    window.location.href = '/userPanel'
   }
   else if(loggedIn===true)
   {
-    window.location.href = '/userPanel?userName=' + token
+    window.location.href = '/userPanel'
 
   }
   else{
-
-
-
   return (
     <>
       {/* <Nav navOption={navOption} setNavOption={setNavOption} />

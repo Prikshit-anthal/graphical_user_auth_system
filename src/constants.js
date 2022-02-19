@@ -1,15 +1,16 @@
+import { PlayCircleOutlined, LoginOutlined } from '@ant-design/icons'
 
 ///exports here
 export const Nav_content = {
   title: 'GUAS',
   body: [
-    { title: 'Users', icon: 'src' },
-    { title: 'Data', icon: 'src' },
-    { title: 'Logs', icon: 'src' },
-    { title: 'Users', icon: 'src' },
-    { title: 'Report', icon: 'src' },
+    { title: 'Work_Area', icon: <PlayCircleOutlined className='pr-4' /> },
+    { title: 'Settings', icon: <PlayCircleOutlined className='pr-4' /> },
+    { title: 'Fake', icon: <PlayCircleOutlined className='pr-4' /> },
+    { title: 'Fake', icon: <PlayCircleOutlined className='pr-4' /> },
+    { title: 'Fake', icon: <PlayCircleOutlined className='pr-4' /> },
   ],
-  foot: { title: 'Logout', icon: 'src' },
+  foot: { title: 'Logout', icon: <LoginOutlined className='pr-4' /> },
 }
 
 export function GET_RANDOM_INT(max) {

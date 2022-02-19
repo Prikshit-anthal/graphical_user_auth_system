@@ -58,7 +58,7 @@ function Login(prop) {
 
   if(loggedinsecond===true)
   {
-    window.location.href = '/userPanel?userName=' + token
+    window.location.href = '/userPanel'
   }
   else{
   return (
