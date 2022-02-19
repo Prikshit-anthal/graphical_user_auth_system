@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "//prikshit-anthal.github.io/graphical_user_auth_system/static/css/main.0bdf6beb.css",
-    "main.js": "//prikshit-anthal.github.io/graphical_user_auth_system/static/js/main.075b17a5.js",
-    "index.html": "//prikshit-anthal.github.io/graphical_user_auth_system/index.html",
-    "main.0bdf6beb.css.map": "//prikshit-anthal.github.io/graphical_user_auth_system/static/css/main.0bdf6beb.css.map",
-    "main.075b17a5.js.map": "//prikshit-anthal.github.io/graphical_user_auth_system/static/js/main.075b17a5.js.map"
+    "main.css": "/graphical_user_auth_system/static/css/main.0bdf6beb.css",
+    "main.js": "/graphical_user_auth_system/static/js/main.075b17a5.js",
+    "index.html": "/graphical_user_auth_system/index.html",
+    "main.0bdf6beb.css.map": "/graphical_user_auth_system/static/css/main.0bdf6beb.css.map",
+    "main.075b17a5.js.map": "/graphical_user_auth_system/static/js/main.075b17a5.js.map"
   },
   "entrypoints": [
     "static/css/main.0bdf6beb.css",
