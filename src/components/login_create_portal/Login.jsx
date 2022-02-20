@@ -6,6 +6,8 @@ import { collection, getDocs } from 'firebase/firestore'
 
 function Login(prop) {
   const type = prop.type
+  const Loader = prop.LOADER;
+
   const [userNameData, setUserNameData] = useState([])
 
   function validateUsername(name) {
@@ -38,15 +40,18 @@ function Login(prop) {
     //  console.log('Created')
   }
 
-  async function getUserNames() {
-    let userInfo = collection(db, 'Users')
-    let userInfo_doc = await getDocs(userInfo)
-    let userData = userInfo_doc.docs.map((doc) => doc.data().userName)
-    setUserNameData(userData)
-    //  console.log(userData)
-  }
+
 
   useLayoutEffect(() => {
+    Loader(true);
+      async function getUserNames() {
+        let userInfo = collection(db, 'Users')
+        let userInfo_doc = await getDocs(userInfo)
+        let userData = userInfo_doc.docs.map((doc) => doc.data().userName)
+        setUserNameData(userData)
+        Loader(false)
+        //  console.log(userData)
+      }
     getUserNames()
   }, [])
 

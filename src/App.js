@@ -94,10 +94,16 @@ const obj = {
     <>
       <Loader display={displayLoader} />
       <Routes>
-        <Route path='/login' element={<Login type={'login'} />} />
+        <Route
+          path='/login'
+          element={<Login type={'login'} LOADER={setDisplayLoader} />}
+        />
         <Route path='/' element={<InstructionPopUp />} />
 
-        <Route path='/create' element={<Login type={'create'} />} />
+        <Route
+          path='/create'
+          element={<Login type={'create'} LOADER={setDisplayLoader} />}
+        />
         <Route
           path='/display'
           element={<Display DB_DATA={obj} LOADER={setDisplayLoader} />}
