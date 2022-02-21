@@ -46,7 +46,7 @@ function SelectImgFromTag(poops) {
   const [type, setType] = useState('')
   // const [selectedForPass, setSelectionForPass] = useState([])
 
-  console.log(selectedForPass)
+  // console.log(selectedForPass)
 
   useLayoutEffect(() => {
    Loader(true)
@@ -61,7 +61,7 @@ function SelectImgFromTag(poops) {
     var decrypted = atob(params.get('userName'))
     setType(atob(params.get('type')))
     setUserName(decrypted)
-    console.log(userName)
+    // console.log(userName)
 
      return () => {
        clearTimeout(timer1)
@@ -84,8 +84,8 @@ function SelectImgFromTag(poops) {
 
   const createNewUser = async () => {
 
-console.log(selectedForPass.length)
-console.log(selectedForPass)
+// console.log(selectedForPass.length)
+// console.log(selectedForPass)
     if (selectedForPass.length < 5) {
       alert('Min 5 imgs to be selected for password')
       return
@@ -98,7 +98,7 @@ console.log(selectedForPass)
       imgArr.push(images[selectedForPass[i][0]][selectedForPass[i][1]])
     }
 
-    console.log(userName)
+    // console.log(userName)
 
     //if new account
     if (type === 'create') {
@@ -115,7 +115,7 @@ console.log(selectedForPass)
         maxImages: 5,
         timeStamp: timeStamp,
       })
-      console.log('done')
+      // console.log('done')
       alert('Account made')
       //loader off
       Loader(false)
@@ -137,7 +137,7 @@ console.log(selectedForPass)
       const userDoc = await getDocs(queryForUsername)
       var userImageUrl_multi = userDoc.docs.map((doc) => doc.data().timeStamp)
 
-      console.log(userImageUrl_multi)
+      // console.log(userImageUrl_multi)
 
       //  update docs
       await updateDoc(doc(db, 'Users', userImageUrl_multi[0]), {
@@ -283,7 +283,7 @@ console.log(selectedForPass)
                                 return selectedForPass
                               })
 
-                              console.log(selectedForPass)
+                              // console.log(selectedForPass)
                               return
                             }
 
@@ -302,7 +302,7 @@ console.log(selectedForPass)
 
                               return val
                             })
-                            console.log(selectedForPass)
+                            // console.log(selectedForPass)
                           }}
                         />
                       </div>

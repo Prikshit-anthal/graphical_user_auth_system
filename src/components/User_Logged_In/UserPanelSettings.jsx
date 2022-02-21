@@ -58,10 +58,10 @@ function UserPanelSettings(poops) {
     let boolCheck = false
     //    console.log(e.target.parentNode.getElementsByClassName('validMark')[0])
     // console.log('u' + e.target.value)
-    console.log('hi')
-    console.log(e.target.value.length)
+    // console.log('hi')
+    // console.log(e.target.value.length)
     if (e.target.value.length === 0) {
-      console.log('in')
+      // console.log('in')
       setCanSet(false)
       setInputState('enter')
       return
@@ -89,7 +89,7 @@ function UserPanelSettings(poops) {
     const queryForUsername = query(userInfo, where('userName', '==', userName))
     const userDoc = await getDocs(queryForUsername)
     var userImageUrl_multi = userDoc.docs.map((doc) => doc.data().timeStamp)
-    console.log(userImageUrl_multi)
+    // console.log(userImageUrl_multi)
 
     var newName = document.getElementById('newUserName').value
 
@@ -119,7 +119,7 @@ function UserPanelSettings(poops) {
           User Account Settings
           <div
             onClick={() => {
-              console.log(ref.current)
+              // console.log(ref.current)
               ref.current.className === 'visibleToSlide'
                 ? (ref.current.className = 'hiddenToSlide')
                 : (ref.current.className = 'visibleToSlide')

@@ -49,8 +49,8 @@ function Display(poops) {
   const Loader=poops.LOADER;
 
 
-console.log(images);
-console.log(tagNames);
+// console.log(images);
+// console.log(tagNames);
 
   const [userImages, setUserImages] = useState([])
   const [uuserImages, usetUserImages] = useState([])
@@ -75,7 +75,7 @@ console.log(tagNames);
     setEncryptUserName(params.get('userName'))
     var decrypted = atob(params.get('userName'))
     var userName = decrypted
-    console.log(userName)
+    // console.log(userName)
 
     async function getUserImages() {
       //rand images
@@ -85,10 +85,10 @@ console.log(tagNames);
           randomImages.push(images[i][j])
         }
       }
-      console.log(randomImages)
+      // console.log(randomImages)
       //shuffle
       randomImages = SHUFFLE_ARRAY(randomImages)
-      console.log(randomImages)
+      // console.log(randomImages)
       //get user images
 
       const userInfo = collection(db, 'Users')
@@ -98,34 +98,34 @@ console.log(tagNames);
       )
       const userDoc = await getDocs(queryForUsername)
       var userImageUrl_multi = userDoc.docs.map((doc) => doc.data().imagesUrl)
-      console.log(userImageUrl_multi)
+      // console.log(userImageUrl_multi)
       let userImageUrl = userImageUrl_multi[0].slice()
-      console.log(userImageUrl[0])
+      // console.log(userImageUrl[0])
 
       userImageUrl = SHUFFLE_ARRAY(userImageUrl)
       setUserImageUrls(userImageUrl.slice())
 
-      console.log(userImageUrl)
+      // console.log(userImageUrl)
 
       // usetUserImages(userImageUrl)
 
       var minImages = parseInt(userDoc.docs.map((doc) => doc.data().minImages))
       var maxImages = parseInt(userDoc.docs.map((doc) => doc.data().maxImages))
 
-      console.log(minImages + maxImages)
+      // console.log(minImages + maxImages)
       let noOfImages = minImages + GET_RANDOM_INT(maxImages - minImages)
       setNoOfImagess(noOfImages)
-      console.log('no of images' + noOfImages)
+      // console.log('no of images' + noOfImages)
       //hhhhh
       const finalImages = new Set()
       //set for images
 
       for (let i = 0; i < noOfImages; i++) {
         finalImages.add(userImageUrl[i])
-        console.log('hi')
+        // console.log('hi')
       }
       let i = 0
-      console.log(randomImages)
+      // console.log(randomImages)
       while (true) {
         if (finalImages.size === 15) {
           break
@@ -143,8 +143,8 @@ console.log(tagNames);
         i++
       }
 
-      console.log(finalImages)
-      console.log(i)
+      // console.log(finalImages)
+      // console.log(i)
 
       setUserImages(SHUFFLE_ARRAY([...finalImages]))
 
@@ -163,13 +163,13 @@ console.log(tagNames);
   }, [images])
 
 
-  console.log(tagNames)
+  // console.log(tagNames)
 
   const verifyPassword = () => {
-    console.log(noOfImagess)
-    console.log(userImageUrls)
+    // console.log(noOfImagess)
+    // console.log(userImageUrls)
     if (userAns.length !== noOfImagess) {
-      alert('Wrong passi')
+      alert('Wrong password')
       return
     }
     for (let i = 0; i < userAns.length; i++) {
@@ -191,7 +191,7 @@ console.log(tagNames);
     alert('Login Complete')
     }
     else{
-        alert('2nd type');
+        alert('Validated');
         window.location.href =
           '/createUserPassword?userName=' +
           encryptUserName +
